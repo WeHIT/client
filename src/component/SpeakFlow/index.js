@@ -8,7 +8,8 @@ import {
   Dimensions
 } from 'react-native';
 
-import EasySpeak from '../EasySpeak'
+import EasySpeak from '../EasySpeak';
+import MultiImgText from '../MultiImgText';
 
 export default class SpeakFlow extends Component {
   render() {
@@ -22,6 +23,7 @@ export default class SpeakFlow extends Component {
           status='NOME'
           text='你所在地区是哈尔滨，今天温度 -40 度，注意身体别冻死自己'
         />
+        <MultiImgText />        
       </View>
     );
   }
@@ -30,7 +32,6 @@ export default class SpeakFlow extends Component {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
-    backgroundColor: 'yellow',
     height: Dimensions.get('window').height - 200
   },
   viewTextWhite: {

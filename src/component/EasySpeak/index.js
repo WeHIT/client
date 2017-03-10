@@ -24,7 +24,6 @@ export default class EasySpeak extends Component {
 }
 
 const styles = StyleSheet.create({
-  
   viewTextWhite: {
     width: 300,
     backgroundColor: 'white',
