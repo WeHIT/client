@@ -24,19 +24,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    paddingTop: 20,
-    height: 84,
+    paddingTop: 10,
+    height: 64,
   },
   imgIcon: {
     position: 'relative',
     top: 14,
-    height: 64,
-    width: 64
+    height: 54,
+    width: 54
   },
   more: {
     position: 'absolute',
     right: 10,
-    top: 48,
+    top: 38,
     width: 30,
     height: 10
   }
