@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigator } from 'react-native';
 
-import routeMap from './router';
+import routeMap from '@router';
 
 configureScene = (route) => {
   return Navigator.SceneConfigs.VerticalDownSwipeJump;

@@ -9,7 +9,7 @@ import {
   Image
 } from 'react-native';
 
-import routeMap from '../../../../router';
+import routeMap from '@router';
 
 const data = [{
   img: require('./WeHITQ.png'),
