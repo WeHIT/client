@@ -3,12 +3,15 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Alert,
+  Image,
+  Navigator
 } from 'react-native';
 
 import HeaderBar from '../../component/HeaderBar';
 import SpeakFlow from '../../component/SpeakFlow';
-
+import Intro from '../../container/Intro'
 export default class App extends Component {
   render() {
     return (
