@@ -15,6 +15,7 @@ import configureStore from "./store";
 
 import HeaderBar from './container/HeaderBar';
 import SpeakFlow from './container/SpeakFlow';
+import TipBar from './container/TipBar';
 
 const store = configureStore({}, hashHistory);
 
@@ -25,6 +26,7 @@ export default class App extends Component {
         <View style={styles.container}>
           <HeaderBar />
           <SpeakFlow />
+          <TipBar />
         </View>
       </Provider>
     );
