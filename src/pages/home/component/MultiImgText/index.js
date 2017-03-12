@@ -32,8 +32,9 @@ export default class MultiImgText extends Component {
               <SingleImgText
                 style={[styles.hasBottomBorder]}
                 key={index}
-                kind={index === 0 ? 'top' : 'bottom'}
+                pos={index === 0 ? 'top' : 'bottom'}
                 hasBottomBorder={index !== 0 && index !== data.length-1 ? true : false}
+                hasPaddingTop={index !== 0 ? true : false}
                 title={item.title}
                 img={item.img}
               />
@@ -48,8 +49,12 @@ export default class MultiImgText extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
+    marginLeft: 16,
     width: 300,
-    borderRadius: 20,
+    borderTopLeftRadius: 16,
+    borderBottomRightRadius: 16,
+    borderTopRightRadius: 2,
+    borderBottomLeftRadius: 2,
     overflow: 'hidden'
   },
 });

@@ -10,40 +10,41 @@ import {
 
 export default class HeaderBar extends Component {
   static defaultProps = {
-    kind: 'bottom',
+    pos: 'bottom',
     img: require('./demo.png'),
     title: 'Hello'
   };
 
   static propTypes = {
-    kind: PropTypes.string,
+    pos: PropTypes.string,
     img: PropTypes.string,
     title: PropTypes.string,
-    hasBottomBorder: PropTypes.bool
+    hasBottomBorder: PropTypes.bool,
+    hasPaddingTop: PropTypes.bool
   };
 
   constructor(props) {
     super(props);
   };
-testOnload() {
-  console.log(111)
-}
+
   render() {
     const {
-      kind,
+      pos,
       img,
       title,
       hasBottomBorder,
+      hasPaddingTop
     } = this.props;
     return (
-      <View style={[styles.container, hasBottomBorder ? styles.hasBottomBorder : null]}>
+      <View style={[styles.container,
+      hasBottomBorder ? styles.hasBottomBorder : null,
+      hasPaddingTop ? styles.hasPaddingTop : null]}>
         {
-          kind === 'top' ?
+          pos === 'top' ?
           <View style={[styles.commonContainer, styles.topContainer]}>
             <Image 
             style={[styles.commonImgIcon, styles.topImgIcon]} 
-            source={img ? {uri: img} : require('./demo.png')}
-            onLoad={()=>this.testOnload()}/>
+            source={img ? {uri: img} : require('./demo.png')} />
             <View style={[styles.commonTitleView, styles.topTitleView]}>
               <Text style={[styles.commonTitle, styles.topTitle]}>{title}</Text>
             </View>
@@ -76,10 +77,12 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
   hasBottomBorder: {
-    paddingTop: 4,
     paddingBottom: 4,
     borderBottomWidth: 0.5,
     borderBottomColor: '#bbb',
+  },
+  hasPaddingTop: {
+    paddingTop: 4
   },
   commonImgIcon: {
 

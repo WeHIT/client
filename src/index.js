@@ -4,7 +4,7 @@ import { Navigator } from 'react-native';
 import routeMap from '@router';
 
 configureScene = (route) => {
-  return Navigator.SceneConfigs.VerticalDownSwipeJump;
+  return Navigator.SceneConfigs.PushFromRight;
 };
 
 renderScene = (route, navigator) => {

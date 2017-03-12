@@ -13,8 +13,8 @@ import {
 
 import configureStore from "./store";
 
-import HeaderBar from './component/HeaderBar';
-import SpeakFlow from './component/SpeakFlow';
+import HeaderBar from './container/HeaderBar';
+import SpeakFlow from './container/SpeakFlow';
 
 const store = configureStore({}, hashHistory);
 
