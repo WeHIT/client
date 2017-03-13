@@ -78,8 +78,9 @@ export default class App extends Component {
             keyboardHeight={keyboardHeight}
             keyboardStatus={keyboardStatus} />
           <TipBar />
-          <TextInput style={styles.textInput} />
-          <KeyboardSpacer keyboardSpace={keyboardHeight * keyboardStatus}/>
+          <TextInputBar style={styles.textInput} />
+          <KeyboardSpacer
+            keyboardSpace={keyboardHeight * keyboardStatus} />
           </View>
       </Provider>
     );

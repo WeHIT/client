@@ -26,7 +26,8 @@ export default class TipBar extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <ScrollView horizontal={true}>
+        <ScrollView 
+          horizontal={true} >
           {
             data.length ? data.map((item, index) => {
               return (
@@ -44,6 +45,6 @@ export default class TipBar extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 4
+    paddingTop: 8
   }
 });

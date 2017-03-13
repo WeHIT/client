@@ -15,7 +15,7 @@ export default class TextInputBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: '这是输入框'
+      text: ''
     }
   }
 
@@ -27,21 +27,15 @@ export default class TextInputBar extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <View
-        behavior="padding">
-        <TextInput
-            style={styles.textInput}
-            onChangeText={(val) => this.changeText(val)}
-            value={this.state.text} />
+        <View style={styles.textInputContainer}>
           <TextInput
             style={styles.textInput}
             onChangeText={(val) => this.changeText(val)}
             value={this.state.text} />
-            <View style={{ height: 260 }} />
-        </View>
-        <View>
-
-        </View>
+          </View>
+          <View style={styles.buttonTextContainer}>
+            <Text style={styles.buttonText}>发送</Text>
+          </View>
       </View>
     );
   }
@@ -49,11 +43,28 @@ export default class TextInputBar extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 4
+    flexDirection: 'row',
+    paddingTop: 10,
+    paddingBottom: 12,
+    marginLeft: 8,
+    marginRight: 8
+  },
+  textInputContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    borderRadius: 4
+  },
+  buttonTextContainer: {
+    marginLeft: 6,
+    paddingLeft: 10,
+    paddingRight: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#f8e71c',
+    borderRadius: 6
   },
   textInput: {
-    height: 40,
+    height: 34,
     borderColor: 'gray',
-    borderWidth: 1
   }
 });

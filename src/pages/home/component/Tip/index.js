@@ -43,14 +43,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     minWidth: 20,
     backgroundColor: 'white',
-    marginLeft: 10,
+    marginLeft: 8,
     paddingLeft: 6,
-    paddingRight: 6,
-    paddingTop: 6,
+    paddingRight: 4,
+    paddingTop: 4,
     paddingBottom: 6,
-    borderRadius: 10,
+    borderRadius: 18,
   },
   tipText: {
-    fontSize: 16
+    fontSize: 14
   }
 });

@@ -49,7 +49,7 @@ export default class MultiImgText extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    marginLeft: 16,
+    marginLeft: 8,
     width: 300,
     borderTopLeftRadius: 16,
     borderBottomRightRadius: 16,

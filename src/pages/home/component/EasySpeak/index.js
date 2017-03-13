@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     paddingRight: 8,
   },
   leftViewStyle: {
-    marginLeft: 16,
+    marginLeft: 8,
     backgroundColor: 'white',
     borderTopLeftRadius: 16,
     borderBottomRightRadius: 16,
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 2,
   },
   rightViewStyle: {
-    marginRight: 16,
+    marginRight: 8,
     backgroundColor: '#35C878',
     borderTopRightRadius: 16,
     borderBottomLeftRadius: 16,
