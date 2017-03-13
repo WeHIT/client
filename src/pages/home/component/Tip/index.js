@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
     minWidth: 20,
     backgroundColor: 'white',
     marginLeft: 10,
-    paddingLeft: 4,
-    paddingRight: 4,
-    paddingTop: 4,
-    paddingBottom: 4,
+    paddingLeft: 6,
+    paddingRight: 6,
+    paddingTop: 6,
+    paddingBottom: 6,
     borderRadius: 10,
   },
   tipText: {
-    fontSize: 12
+    fontSize: 16
   }
 });

@@ -44,6 +44,6 @@ export default class TipBar extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 10
+    paddingTop: 4
   }
 });
