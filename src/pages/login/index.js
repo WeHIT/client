@@ -36,10 +36,14 @@ export default class Login extends Component {
       <View style={styles.container}>
         <View style={styles.containerHeader}>
           <View style={styles.leftTitle}>
+            <Image
+              style={styles.backIcon}
+              source={require('../../asset/img/back.png')}
+            />
             <Text>返回</Text>
           </View>
           <View style={styles.contentTitle}>
-            <Text>登录</Text>
+            <Text>登 录</Text>
           </View>
           <View style={styles.rightTitle}>
             <Text>注册</Text>
@@ -91,9 +95,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8e71c',
   },
   leftTitle: {
-    width: 44,
+    width: 56,
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'flex-start',
+    marginLeft: 10,
+  },
+  backIcon: {
+    width: 16,
+    height: 16
   },
   contentTitle: {
     flex: 1,
@@ -101,15 +110,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   rightTitle: {
-    width: 44,
+    width: 56,
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'flex-end',
+    marginRight: 10,
   },
   containerBody: {
     flex: 1,
-    // flexDirection: 'column',
-    // justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: '#e7e9ec',
   },
   logoContainer: {
@@ -152,7 +159,6 @@ const styles = StyleSheet.create({
     width: 280
   },
   loginText: {
-    fontWeight: 'bold',
     fontSize: 18,
     color: '#444'
   }
