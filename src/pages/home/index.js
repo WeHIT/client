@@ -21,7 +21,7 @@ import HeaderBar from './container/HeaderBar';
 import SpeakFlow from './container/SpeakFlow';
 import TipBar from './container/TipBar';
 import TextInputBar from './container/TextInputBar';
-import KeyboardSpacer from './component/KeyboardSpacer';
+import KeyboardSpacer from '@common/component/KeyboardSpacer';
 
 const store = configureStore({}, hashHistory);
 

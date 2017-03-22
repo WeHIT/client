@@ -16,7 +16,11 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import Toast, {DURATION} from 'react-native-easy-toast';
+
 import urlMap from '@url';
+
+import KeyboardSpacer from '@common/component/KeyboardSpacer';
 // import configureStore from "./store";
 
 // const store = configureStore({}, hashHistory);
@@ -26,20 +30,106 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLogin: true,
+      // 键盘高度
+      keyboardHeight: 0,
+      // 键盘状态(0: 关闭; 1: 展开)
+      keyboardStatus: 0,
+      id: '',
+      password: '',
+      repassword: '',
+      college: '',
+      idCard: ''
     }
   };
 
   componentDidMount() {
+    this.keyboardShow = Keyboard.addListener('keyboardWillShow', 
+      this.updateKeyboardSpace.bind(this)
+    );
+    this.keyboardHide = Keyboard.addListener('keyboardWillHide',
+      this.resetKeyboardSpace.bind(this)
+    );
+  }
+
+  updateKeyboardSpace(frames){
+    if(!frames.endCoordinates){
+      return;
+    }
+    // 获取键盘高度
+    let keyboardHeight = frames.endCoordinates.height;
+    this.setState({
+      keyboardHeight: keyboardHeight,
+      keyboardStatus: 1
+    })
+  }
+
+  resetKeyboardSpace() {
+    this.setState({
+      keyboardStatus: 0
+    })
+  }
+
+  validPassword() {
+    const {
+      password,
+      repassword
+    } = this.state;
+    if(password !== repassword) {
+      this.refs.toast.show('两次密码输入不一致');
+      return false
+    }
+    return true;
   }
 
   touchLoginBtn() {
-    fetch(urlMap.login, {})
-      .then((res) => {
+    const {
+      isLogin,
+      keyboardHeight,
+      keyboardStatus,
+      id,
+      password,
+      repassword,
+      college,
+      idCard,
+    } = this.state;
+
+    if(isLogin) {
+      fetch(urlMap.login, {})
+      .then(res => res.json())
+      .then(res => {
         console.log(res);
+        this.refs.toast.show(res.data);
       });
+    } else {
+      if(this.validPassword()) {
+        fetch(urlMap.reg, {})
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          this.refs.toast.show(res.data);
+        });
+      }
+    }
   };
 
-  render() { 
+  changeLoginOrRegStatus(e) {
+    this.setState({
+      isLogin: !this.state.isLogin
+    })
+  }
+
+  render() {
+    const {
+      isLogin,
+      keyboardHeight,
+      keyboardStatus,
+      id,
+      password,
+      repassword,
+      college,
+      idCard,
+    } = this.state;
     return (
       <View style={styles.container}>
         <View style={styles.containerHeader}>
@@ -53,17 +143,21 @@ export default class Login extends Component {
           <View style={styles.contentTitle}>
             <Text>登 录</Text>
           </View>
-          <View style={styles.rightTitle}>
-            <Text>注册</Text>
-          </View>
+          <TouchableOpacity 
+            style={styles.rightTitle}
+            onPress={(e) => this.changeLoginOrRegStatus(e)}>
+            <Text>
+              {
+                isLogin !== true ?
+                '登录' : '注册'
+              }
+            </Text>
+          </TouchableOpacity>
         </View>
-        <ScrollView 
-          style={styles.containerBody}
-          contentContainerStyle={{flex:1}}
-          keyboardShouldPersistTaps="never"
+        <View style={styles.containerBody}>
+          <ScrollView
+            ref={ref => this.scrollView  = ref}
           >
-          <KeyboardAvoidingView
-            behavior="padding">
             <View style={styles.logoContainer}>
               <Image
                 style={styles.logoImg}
@@ -72,24 +166,71 @@ export default class Login extends Component {
             </View>
             <View style={styles.loginInputContainer}>
               <TextInput
-                placeholder="账号"
-                style={styles.textInput} />
+                placeholder="学号"
+                style={styles.textInput}
+                value={id}
+                onChangeText={(value) => this.setState({id: value})} />
             </View>
             <View style={styles.loginInputContainer}>
               <TextInput
                 placeholder="密码"
                 password={true}
-                style={styles.textInput} />
+                style={styles.textInput}
+                value={password}
+                onChangeText={(value) => this.setState({password: value})} />
             </View>
+            {
+              isLogin !== true ?
+              <View>
+                <View style={styles.loginInputContainer}>
+                  <TextInput
+                    placeholder="再次输入密码"
+                    password={true}
+                    style={styles.textInput}
+                    value={repassword}
+                    onChangeText={(value) => this.setState({repassword: value})} />
+                </View>
+                <View style={styles.loginInputContainer}>
+                  <TextInput
+                    placeholder="学院"
+                    style={styles.textInput}
+                    value={college}
+                    onChangeText={(value) => this.setState({college: value})} />
+                </View>
+                <View style={styles.loginInputContainer}>
+                  <TextInput
+                    placeholder="身份证后6位(可选)"
+                    style={styles.textInput}
+                    value={idCard}
+                    onChangeText={(value) => this.setState({idCard: value})} />
+                </View>
+              </View> : null
+            }
             <View style={styles.loginBtnContainer}>
               <TouchableOpacity
               style={styles.loginContainer}
               onPress={() => {this.touchLoginBtn()}}>
-                <Text style={styles.loginText}>登       录</Text>
+                <Text style={styles.loginText}>
+                  {
+                    isLogin === true ?
+                    '登       录' : '注       册'
+                  }
+                </Text>
               </TouchableOpacity>
             </View>
-          </KeyboardAvoidingView>
-        </ScrollView>
+            <KeyboardSpacer
+              keyboardSpace={keyboardHeight * keyboardStatus} />
+          </ScrollView>
+        </View>
+        <Toast
+          ref="toast"
+          style={{backgroundColor:'#f8e71c'}}
+          position='bottom'
+          positionValue={200}
+          fadeInDuration={750}
+          fadeOutDuration={1000}
+          opacity={0.8}
+          textStyle={{color:'black'}} />
       </View>
     );
   }
