@@ -12,9 +12,11 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   ScrollView,
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from 'react-native';
 
+import urlMap from '@url';
 // import configureStore from "./store";
 
 // const store = configureStore({}, hashHistory);
@@ -30,6 +32,12 @@ export default class Login extends Component {
   componentDidMount() {
   }
 
+  touchLoginBtn() {
+    fetch(urlMap.login, {})
+      .then((res) => {
+        console.log(res);
+      });
+  };
 
   render() { 
     return (
@@ -38,7 +46,7 @@ export default class Login extends Component {
           <View style={styles.leftTitle}>
             <Image
               style={styles.backIcon}
-              source={require('../../asset/img/back.png')}
+              source={require('@img/back.png')}
             />
             <Text>返回</Text>
           </View>
@@ -49,13 +57,17 @@ export default class Login extends Component {
             <Text>注册</Text>
           </View>
         </View>
-        <ScrollView style={styles.containerBody}>
+        <ScrollView 
+          style={styles.containerBody}
+          contentContainerStyle={{flex:1}}
+          keyboardShouldPersistTaps="never"
+          >
           <KeyboardAvoidingView
             behavior="padding">
             <View style={styles.logoContainer}>
               <Image
                 style={styles.logoImg}
-                source={require('../../asset/img/WeHITQ.png')}
+                source={require('@img/WeHITQ.png')}
               />
             </View>
             <View style={styles.loginInputContainer}>
@@ -66,12 +78,15 @@ export default class Login extends Component {
             <View style={styles.loginInputContainer}>
               <TextInput
                 placeholder="密码"
+                password={true}
                 style={styles.textInput} />
             </View>
             <View style={styles.loginBtnContainer}>
-              <View style={styles.loginContainer}>
+              <TouchableOpacity
+              style={styles.loginContainer}
+              onPress={() => {this.touchLoginBtn()}}>
                 <Text style={styles.loginText}>登       录</Text>
-              </View>
+              </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
         </ScrollView>
