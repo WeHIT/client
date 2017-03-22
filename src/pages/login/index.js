@@ -45,25 +45,32 @@ export default class Login extends Component {
             <Text>注册</Text>
           </View>
         </View>
-        <View style={styles.containerBody}>
-          <View style={styles.logoContainer}>
-            <Image
-              style={styles.logoImg}
-              source={require('../../asset/img/WeHITQ.png')}
-            />
-          </View>
-          <View style={styles.loginInputContainer}>
-            <TextInput
-              style={styles.textInput} />
-          </View>
-          <View style={styles.loginInputContainer}>
-            <TextInput
-              style={styles.textInput} />
-          </View>
-          <View style={styles.loginBtnContainer}>
-            <Text>登录</Text>
-          </View>
-        </View>
+        <ScrollView style={styles.containerBody}>
+          <KeyboardAvoidingView
+            behavior="padding">
+            <View style={styles.logoContainer}>
+              <Image
+                style={styles.logoImg}
+                source={require('../../asset/img/WeHITQ.png')}
+              />
+            </View>
+            <View style={styles.loginInputContainer}>
+              <TextInput
+                placeholder="账号"
+                style={styles.textInput} />
+            </View>
+            <View style={styles.loginInputContainer}>
+              <TextInput
+                placeholder="密码"
+                style={styles.textInput} />
+            </View>
+            <View style={styles.loginBtnContainer}>
+              <View style={styles.loginContainer}>
+                <Text style={styles.loginText}>登       录</Text>
+              </View>
+            </View>
+          </KeyboardAvoidingView>
+        </ScrollView>
       </View>
     );
   }
@@ -71,8 +78,9 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    
-    
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
   containerHeader: {
     flexDirection: 'row',
@@ -98,12 +106,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   containerBody: {
-    //flex: 1,
-    
-    backgroundColor: '#ccc',
+    flex: 1,
+    // flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    backgroundColor: '#e7e9ec',
   },
   logoContainer: {
     marginTop: 40,
+    marginBottom: 40,
     flexDirection: 'row',
     justifyContent: 'center',
   },
@@ -118,20 +129,31 @@ const styles = StyleSheet.create({
   textInput: {
     height: 40,
     borderColor: 'gray',
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     marginTop: 10,
     width: 280,
     borderRadius: 4,
+    paddingLeft: 20
   },
   loginBtnContainer: {
-    marginTop: 40,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  loginContainer: {
+    marginTop: 20,
     paddingLeft: 10,
     paddingRight: 10,
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f8e71c',
     borderRadius: 6,
     height: 40,
     width: 280
+  },
+  loginText: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: '#444'
   }
 });
