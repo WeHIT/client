@@ -21,6 +21,7 @@ import {
 import Toast, {DURATION} from 'react-native-easy-toast';
 
 import urlMap from '@url';
+import storage from '@storage';
 
 import KeyboardSpacer from '@common/component/KeyboardSpacer';
 // import configureStore from "./store";
@@ -111,6 +112,16 @@ export default class Login extends Component {
       .then(res => {
         console.log(res);
         this.refs.toast.show(res.data.text);
+        storage.save({
+          key: 'token',
+          rawData: res.data.token
+        });
+        
+        storage.load({
+          key: 'token',
+        }).then(ret => {
+          console.log(ret)
+        });
       });
     } else {
       if(this.validPassword()) {
