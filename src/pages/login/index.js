@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Provider } from "react-redux";
 import { hashHistory } from "react-router";
+import md5 from 'md5';
+
 import {
   AppRegistry,
   StyleSheet,
@@ -95,19 +97,39 @@ export default class Login extends Component {
     } = this.state;
 
     if(isLogin) {
-      fetch(urlMap.login, {})
+      fetch(urlMap.login, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id,
+          password: md5(password),
+        }),
+      })
       .then(res => res.json())
       .then(res => {
         console.log(res);
-        this.refs.toast.show(res.data);
+        this.refs.toast.show(res.data.text);
       });
     } else {
       if(this.validPassword()) {
-        fetch(urlMap.reg, {})
+        fetch(urlMap.reg, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            id,
+            password: md5(password),
+            college,
+            idCard
+          }),
+        })
         .then(res => res.json())
         .then(res => {
           console.log(res);
-          this.refs.toast.show(res.data);
+          this.refs.toast.show(res.data.text);
         });
       }
     }
