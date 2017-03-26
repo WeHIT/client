@@ -23,6 +23,8 @@ import storage from '@storage';
 
 import KeyboardSpacer from '@common/component/KeyboardSpacer';
 
+import Header from '../component/Header';
+
 import {
   fetchLogin,
   fetchReg,
@@ -147,6 +149,10 @@ class Login extends Component {
     })
   }
 
+  touchBack(e) {
+    console.log(111)
+  }
+
   render() {
     const {
       isLogin,
@@ -166,27 +172,13 @@ class Login extends Component {
 
     return ( 
       <View style={styles.container}>
-        <View style={styles.containerHeader}>
-          <View style={styles.leftTitle}>
-            <Image
-              style={styles.backIcon}
-              source={require('@img/back.png')}
-            />
-            <Text>返回</Text>
-          </View>
-          <View style={styles.contentTitle}>
-            <Text>{ isLogin === true ? '登 录' : '注 册' }</Text>
-          </View>
-          <TouchableOpacity 
-            style={styles.rightTitle}
-            onPress={(e) => this.changeLoginOrRegStatus(e)}>
-            <Text>
-              {
-                isLogin !== true ? '登录' : '注册'
-              }
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <Header
+          leftText='返回'
+          middleText={isLogin === true ? '登 录' : '注 册'}
+          rightText={isLogin !== true ? '登录' : '注册'}
+          leftCb={e => this.touchBack(e)}
+          rightCb={(e) => this.changeLoginOrRegStatus(e)}
+         />
         <View style={styles.containerBody}>
           <ScrollView
             ref={ref => this.scrollView  = ref}
@@ -301,35 +293,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'center',
-  },
-  containerHeader: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 20,
-    height: 58,
-    backgroundColor: '#f8e71c',
-  },
-  leftTitle: {
-    width: 56,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    marginLeft: 10,
-  },
-  backIcon: {
-    width: 16,
-    height: 16
-  },
-  contentTitle: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  rightTitle: {
-    width: 56,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginRight: 10,
   },
   containerBody: {
     flex: 1,
