@@ -70,10 +70,14 @@ export default class App extends Component {
       keyboardHeight,
       keyboardStatus
     } = this.state;
+    const {
+      ...other
+    } = this.props;
     return (
       <Provider store={store}>
         <View style={styles.container}>
-          <HeaderBar />
+          <HeaderBar 
+            {...other} />
           <SpeakFlow 
             keyboardHeight={keyboardHeight}
             keyboardStatus={keyboardStatus} />

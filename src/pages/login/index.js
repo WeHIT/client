@@ -22,11 +22,18 @@ const store = configureStore({}, hashHistory);
 
 import App from './container';
 
-
-const Login = () => (
-  <Provider store={store}> 
-      <App />
-  </Provider>
-);
+class Login extends Component {
+  render() {
+    const {
+      ...other
+    } = this.props;
+    return(
+      <Provider store={store}> 
+        <App
+          {...other} />
+      </Provider>
+    );
+  }
+}
 
 export default Login;

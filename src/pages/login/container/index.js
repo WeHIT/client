@@ -150,7 +150,7 @@ class Login extends Component {
   }
 
   touchBack(e) {
-    console.log(111)
+    this.props.navigator.pop();
   }
 
   render() {

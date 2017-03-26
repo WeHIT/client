@@ -5,15 +5,26 @@ import {
   Text,
   View,
   Image,
+  TouchableOpacity
 } from 'react-native';
 
+import routeMap from '@router';
 
 export default class HeaderBar extends Component {
+
+  touchMoreCb() {
+    console.log(111)
+    this.props.navigator.push(routeMap.login);
+  }
   render() {
     return (
       <View style={styles.container}>
         <Image style={styles.imgIcon} source={require('./WeHITQ.png')} />
-        <Image style={styles.more} source={require('./more.png')} />
+        <TouchableOpacity
+          style={styles.moreContainer}
+          onPress={e => this.touchMoreCb(e)}>
+          <Image style={styles.more} source={require('./more.png')} />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -33,10 +44,12 @@ const styles = StyleSheet.create({
     height: 54,
     width: 54
   },
-  more: {
+  moreContainer: {
     position: 'absolute',
     right: 10,
     top: 38,
+  },
+  more: {
     width: 30,
     height: 10
   }
