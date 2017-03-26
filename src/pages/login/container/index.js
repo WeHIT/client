@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 
 import Toast, { DURATION } from 'react-native-easy-toast';
+import {Select, Option} from "react-native-chooser";
 
 import urlMap from '@url';
 import storage from '@storage';
@@ -29,6 +30,23 @@ import {
   fetchLogin,
   fetchReg,
 } from '../action';
+
+const collegeList = [{
+  key: '计算机',
+  value: '计算机学院'
+}, {
+  key: '管理学院',
+  value: '经济管理学院'
+}, {
+  key: '管理学院',
+  value: '经济管理学院'
+}, {
+  key: '管理学院',
+  value: '经济管理学院'
+}, {
+  key: '管理学院',
+  value: '经济管理学院'
+}];
 
 class Login extends Component {
 
@@ -153,6 +171,12 @@ class Login extends Component {
     this.props.navigator.pop();
   }
 
+  onSelect(college) {
+    console.log(college);
+    this.setState({
+      college,
+    })
+  }
   render() {
     const {
       isLogin,
@@ -216,11 +240,23 @@ class Login extends Component {
                     onChangeText={(value) => this.setState({repassword: value})} />
                 </View>
                 <View style={styles.loginInputContainer}>
-                  <TextInput
-                    placeholder="学院"
-                    style={styles.textInput}
-                    value={college}
-                    onChangeText={(value) => this.setState({college: value})} />
+                  <Select
+                      onSelect = {this.onSelect.bind(this)}
+                      defaultText  = "请选择学院"
+                      style={[styles.textInput, {borderWidth: 0}]}
+                      textStyle = {{ fontSize: 18, color: '#c8c8ce'}}
+                      backdropStyle  = {{backgroundColor : "#d3d5d6"}}
+                      optionListStyle = {{backgroundColor : "#F5FCFF"}}
+                    >
+                    {
+                      collegeList.map((item, index) => {
+                        return(
+                          <Option key={index} value={item.key}>{item.value}</Option>
+                        )
+                      })
+                    }
+
+                  </Select>
                 </View>
                 <View style={styles.loginInputContainer}>
                   <TextInput

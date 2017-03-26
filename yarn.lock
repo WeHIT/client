@@ -2987,6 +2987,10 @@ react-native-app-intro@^1.1.5:
     assign-deep "^0.4.5"
     react-native-swiper "git+https://github.com/FuYaoDe/react-native-swiper.git"
 
+react-native-chooser:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-chooser/-/react-native-chooser-1.4.0.tgz#16a77c613fb54dd0f21f78a1b65acd73bc1effb5"
+
 react-native-easy-toast:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-native-easy-toast/-/react-native-easy-toast-1.0.5.tgz#01600a4075f45c549d61427fe48dd2edbb98628e"
