@@ -5,6 +5,7 @@ import {
   FETCHING_REG,
   FETCHING_REG_SUCCESS,
   FETCHING_REG_FAILURE,
+  CHANGE_IS_LOGIN,
 } from '../constant';
 
 import {
@@ -74,4 +75,11 @@ export function fetchReg(data) {
         console.log(`err: ${err}`);
       })
   };
+}
+
+export function changeIsLogin(status) {
+  return {
+    type: CHANGE_IS_LOGIN,
+    payload: status,
+  }
 }

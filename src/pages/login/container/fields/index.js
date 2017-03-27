@@ -24,12 +24,12 @@ import storage from '@storage';
 
 import KeyboardSpacer from '@common/component/KeyboardSpacer';
 
-import Header from '../component/Header';
+import Header from '../../component/Header';
 
 import {
   fetchLogin,
   fetchReg,
-} from '../action';
+} from '../../action';
 
 const collegeList = [{
   key: '计算机',
@@ -48,12 +48,11 @@ const collegeList = [{
   value: '经济管理学院'
 }];
 
-class Login extends Component {
+class Fields extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      isLogin: true,
       // 键盘高度
       keyboardHeight: 0,
       // 键盘状态(0: 关闭; 1: 展开)
@@ -62,7 +61,9 @@ class Login extends Component {
       password: '',
       repassword: '',
       college: '',
-      idCard: ''
+      idCard: '',
+      // 标记学院是否进行了选择
+      hasSelected: 0,
     }
   };
 
@@ -131,7 +132,6 @@ class Login extends Component {
 
   touchLoginBtn() {
     const {
-      isLogin,
       keyboardHeight,
       keyboardStatus,
       id,
@@ -142,11 +142,12 @@ class Login extends Component {
     } = this.state;
 
     const {
+      isLogin,
       fetchLogin,
       fetchReg
     } = this.props;
 
-    if(isLogin) {
+    if(isLogin.status) {
       fetchLogin({
         id,
         password,
@@ -161,25 +162,16 @@ class Login extends Component {
     }
   };
 
-  changeLoginOrRegStatus(e) {
-    this.setState({
-      isLogin: !this.state.isLogin
-    })
-  }
-
-  touchBack(e) {
-    this.props.navigator.pop();
-  }
 
   onSelect(college) {
     console.log(college);
     this.setState({
       college,
+      hasSelected: 1,
     })
   }
   render() {
     const {
-      isLogin,
       keyboardHeight,
       keyboardStatus,
       id,
@@ -187,22 +179,19 @@ class Login extends Component {
       repassword,
       college,
       idCard,
+      hasSelected,
     } = this.state;
 
     const {
+      isLogin,
       login,
-      reg
+      reg,
     } = this.props;
+
+    const isLoginStatus = isLogin ? isLogin.status : true;
 
     return ( 
       <View style={styles.container}>
-        <Header
-          leftText='返回'
-          middleText={isLogin === true ? '登 录' : '注 册'}
-          rightText={isLogin !== true ? '登录' : '注册'}
-          leftCb={e => this.touchBack(e)}
-          rightCb={(e) => this.changeLoginOrRegStatus(e)}
-         />
         <View style={styles.containerBody}>
           <ScrollView
             ref={ref => this.scrollView  = ref}
@@ -229,7 +218,7 @@ class Login extends Component {
                 onChangeText={(value) => this.setState({password: value})} />
             </View>
             {
-              isLogin !== true ?
+              isLoginStatus !== true ?
               <View>
                 <View style={styles.loginInputContainer}>
                   <TextInput
@@ -244,7 +233,7 @@ class Login extends Component {
                       onSelect = {this.onSelect.bind(this)}
                       defaultText  = "请选择学院"
                       style={[styles.textInput, {borderWidth: 0}]}
-                      textStyle = {{ fontSize: 18, color: '#c8c8ce'}}
+                      textStyle = {{ fontSize: 18, color: hasSelected ? 'black' : '#c8c8ce'}}
                       backdropStyle  = {{backgroundColor : "#d3d5d6"}}
                       optionListStyle = {{backgroundColor : "#F5FCFF"}}
                     >
@@ -273,7 +262,7 @@ class Login extends Component {
               onPress={() => {this.touchLoginBtn()}}>
                 <Text style={styles.loginText}>
                   {
-                    isLogin === true ? (
+                    isLoginStatus === true ? (
                       login.isFetching ? '正在登录中...' : '登       录'
                     ) : (
                       reg.isFetching ? '正在注册中...' : '注       册'
@@ -304,6 +293,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     login: state.login,
     reg: state.reg,
+    isLogin: state.isLogin,
   };
 }
 
@@ -314,6 +304,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     fetchReg: (data) => {
       dispatch(fetchReg(data));
+    },
+    changeIsLogin: (data) => {
+      dispatch(changeIsLogin(data));
     }
   }
 }
@@ -321,7 +314,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Login);
+)(Fields);
 
 
 const styles = StyleSheet.create({

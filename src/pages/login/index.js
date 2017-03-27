@@ -20,7 +20,7 @@ import configureStore from "./store";
 
 const store = configureStore({}, hashHistory);
 
-import App from './container';
+import App from './container/app';
 
 class Login extends Component {
   render() {

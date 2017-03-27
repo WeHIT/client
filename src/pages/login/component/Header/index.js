@@ -20,10 +20,10 @@ export default class Header extends Component {
     leftImg: require('@img/back.png'),
     leftCb: () => {},
     middleText: '登 录',
-    middleImg: '',
+    middleImg: {},
     middleCb: () => {},
     rightText: '注册',
-    rightImg: '',
+    rightImg: {},
     rightCb: () => {},
     bgColor: '#f8e71c',
   };
