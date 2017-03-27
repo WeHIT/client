@@ -17,7 +17,7 @@ import {
 export default class Header extends Component {
   static defaultProps = {
     leftText: '返回',
-    leftImg: '@img/back.png',
+    leftImg: require('@img/back.png'),
     leftCb: () => {},
     middleText: '登 录',
     middleImg: '',
@@ -30,13 +30,13 @@ export default class Header extends Component {
 
   static propTypes = {
     leftText: PropTypes.string,
-    leftImg: PropTypes.string,
+    leftImg: PropTypes.object,
     leftCb: PropTypes.func,
     middleText: PropTypes.string,
-    middleImg: PropTypes.string,
+    middleImg: PropTypes.object,
     middleCb: PropTypes.func,
     rightText: PropTypes.string,
-    rightImg: PropTypes.string,
+    rightImg: PropTypes.object,
     rightCb: PropTypes.func,
   };
 
@@ -67,7 +67,7 @@ export default class Header extends Component {
             onPress={e => leftCb(e)}>
             <Image
               style={styles.backIcon}
-              source={require('@img/back.png')}
+              source={leftImg}
             />
             <Text>{leftText}</Text>
           </TouchableOpacity>
