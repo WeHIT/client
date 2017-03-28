@@ -1,7 +1,6 @@
-import {
-  FETCHING_REG,
-  FETCHING_REG_SUCCESS,
-  FETCHING_REG_FAILURE } from '../constant';
+import { handleActions } from 'redux-actions';
+
+import * as actions from '../action';
 
 const initState = {
   data: {},
@@ -10,31 +9,22 @@ const initState = {
   error: false,
 }
 
-export default function regReducer(state = initState, action) {
-  switch(action.type) {
-    case FETCHING_REG: {
-      return {
-        ...state,
-        data: {},
-        isFetching: true,
-      }
-    }
-    case FETCHING_REG_SUCCESS: {
-      return {
-        ...state,
-        data: action.payload,
-        isFetching: false,
-      }
-    }
-    case FETCHING_REG_FAILURE: {
-      return {
-        ...state,
-        isFetching: false,
-        error: true
-      }
-    }
-    default: {
-      return state;
-    }
-  }
-}
+const regReducer = handleActions({
+  [actions.fetchingReg]: (state, action) => ({
+    ...state,
+    data: {},
+    isFetching: true,
+  }),
+  [actions.fetchingRegSuccess]: (state, action) => ({
+    ...state,
+    data: action.payload,
+    isFetching: false,
+  }),
+  [actions.fetchingLoginFailure]: (state, actions) => ({
+    ...state,
+    isFetching: false,
+    error: true
+  }),
+}, initState);
+
+export default regReducer;

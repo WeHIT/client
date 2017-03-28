@@ -30,13 +30,13 @@ export default class Header extends Component {
 
   static propTypes = {
     leftText: PropTypes.string,
-    leftImg: PropTypes.object,
+    leftImg: PropTypes.number,
     leftCb: PropTypes.func,
     middleText: PropTypes.string,
-    middleImg: PropTypes.object,
+    middleImg: PropTypes.number,
     middleCb: PropTypes.func,
     rightText: PropTypes.string,
-    rightImg: PropTypes.object,
+    rightImg: PropTypes.number,
     rightCb: PropTypes.func,
   };
 

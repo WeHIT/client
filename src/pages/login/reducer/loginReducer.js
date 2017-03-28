@@ -1,7 +1,6 @@
-import {
-  FETCHING_LOGIN,
-  FETCHING_LOGIN_SUCCESS,
-  FETCHING_LOGIN_FAILURE } from '../constant';
+import { handleActions } from 'redux-actions';
+
+import * as actions from '../action';
 
 const initState = {
   data: {},
@@ -10,31 +9,22 @@ const initState = {
   error: false,
 }
 
-export default function loginReducer(state = initState, action) {
-  switch(action.type) {
-    case FETCHING_LOGIN: {
-      return {
-        ...state,
-        data: {},
-        isFetching: true,
-      }
-    }
-    case FETCHING_LOGIN_SUCCESS: {
-      return {
-        ...state,
-        data: action.payload,
-        isFetching: false,
-      }
-    }
-    case FETCHING_LOGIN_FAILURE: {
-      return {
-        ...state,
-        isFetching: false,
-        error: true
-      }
-    }
-    default: {
-      return state;
-    }
-  }
-}
+const loginReducer = handleActions({
+  [actions.fetchingLogin]: (state, action) => ({
+    ...state,
+    data: {},
+    isFetching: true,
+  }),
+  [actions.fetchingLoginSuccess]: (state, action) => ({
+    ...state,
+    data: action.payload,
+    isFetching: false,
+  }),
+  [actions.fetchingLoginFailure]: (state, action) => ({
+    ...state,
+    isFetching: false,
+    error: true
+  }),
+}, initState);
+
+export default loginReducer;

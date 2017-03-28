@@ -305,9 +305,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     fetchReg: (data) => {
       dispatch(fetchReg(data));
     },
-    changeIsLogin: (data) => {
-      dispatch(changeIsLogin(data));
-    }
   }
 }
 

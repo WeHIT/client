@@ -1,85 +1,45 @@
-import {
-  FETCHING_LOGIN,
-  FETCHING_LOGIN_SUCCESS,
-  FETCHING_LOGIN_FAILURE,
-  FETCHING_REG,
-  FETCHING_REG_SUCCESS,
-  FETCHING_REG_FAILURE,
-  CHANGE_IS_LOGIN,
-} from '../constant';
+import { createAction } from "redux-actions";
 
+import * as types from '../constant';
 import {
   fetchLoginData,
   fetchRegData
 } from '../api';
 
-export function getLogin() {
-  return {
-    type: FETCHING_LOGIN,
-  };
-}
-
-export function getLoginSuccess(data) {
-  return {
-    type: FETCHING_LOGIN_SUCCESS,
-    payload: data,
-  };
-}
-
-export function getLoginFailure() {
-  return {
-    type: FETCHING_LOGIN_FAILURE,
-  };
-}
+export const fetchingLogin = createAction(types.FETCHING_LOGIN);
+export const fetchingLoginSuccess = createAction(types.FETCHING_LOGIN_SUCCESS, data => data);
+export const fetchingLoginFailure = createAction(types.FETCHING_LOGIN_FAILURE);
 
 export function fetchLogin(data) {
   return (dispatch) => {
-    dispatch(getLogin());
+    dispatch(fetchingLogin());
     fetchLoginData(data)
       .then((res) => {
-        dispatch(getLoginSuccess(res));
+        dispatch(fetchingLoginSuccess(res));
       })
       .catch((err) => {
         console.log(`err: ${err}`);
+        dispatch(fetchingLoginFailure());
       });
   };
 }
 
-export function getReg() {
-  return {
-    type: FETCHING_REG,
-  };
-}
-
-export function getRegSuccess(data) {
-  return {
-    type: FETCHING_REG_SUCCESS,
-    payload: data,
-  };
-}
-
-export function getRegFailure() {
-  return {
-    type: FETCHING_REG_FAILURE,
-  };
-}
+export const fetchingReg = createAction(types.FETCHING_REG);
+export const fetchingRegSuccess = createAction(types.FETCHING_REG_SUCCESS, data => data);
+export const fetchingRegFailure = createAction(types.FETCHING_REG_FAILURE);
 
 export function fetchReg(data) {
   return (dispatch) => {
-    dispatch(getReg());
+    dispatch(fetchingReg());
     fetchRegData(data)
       .then((res) => {
-        dispatch(getRegSuccess(res));
+        dispatch(fetchingRegSuccess(res));
       })
       .catch((err) => {
         console.log(`err: ${err}`);
+        dispatch(fetchingRegFailure());
       })
   };
 }
 
-export function changeIsLogin(status) {
-  return {
-    type: CHANGE_IS_LOGIN,
-    payload: status,
-  }
-}
+export const changeIsLogin = createAction(types.CHANGE_IS_LOGIN, status => status);

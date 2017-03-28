@@ -1,19 +1,16 @@
-import { CHANGE_IS_LOGIN } from '../constant';
+import { handleActions } from 'redux-actions';
+
+import * as actions from '../action';
 
 const initState = {
   status: true,
 }
 
-export default function isLoginReducer(state = initState, action) {
-  switch(action.type) {
-    case CHANGE_IS_LOGIN: {
-      return {
-        ...state,
-        status: action.payload,
-      }
-    }
-    default: {
-      return state;
-    }
-  }
-}
+const isLoginReducer = handleActions({
+  [actions.changeIsLogin]: (state, action) => ({
+    ...state,
+    status: action.payload
+  }),
+}, initState);
+
+export default isLoginReducer;
