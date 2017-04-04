@@ -35,17 +35,17 @@ export default class SpeakFlow extends Component {
     // 键盘展开
     // 键盘展开时 scrollview 变小，内容位置不会发生变化，所以减去键盘高度滑动到最底
     // 键盘关闭时 scrollView 变大，所以再减一个键盘高度
-    if (keyboardStatus === 1) {
-      this.scrollView.scrollTo({
-        y: scrollViewHeight - keyboardHeight,
-        animated: true
-      })
-    } else {
-      this.scrollView.scrollTo({
-        y: scrollViewHeight - 2*keyboardHeight,
-        animated: true
-      })
-    }
+    // if (keyboardStatus === 1) {
+    //   this.scrollView.scrollTo({
+    //     y: scrollViewHeight - keyboardHeight,
+    //     animated: true
+    //   })
+    // } else {
+    //   this.scrollView.scrollTo({
+    //     y: scrollViewHeight - 2*keyboardHeight,
+    //     animated: true
+    //   })
+    // }
   }
 
   render() {

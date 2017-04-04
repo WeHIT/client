@@ -15,6 +15,7 @@ export function fetchLogin(data) {
     dispatch(fetchingLogin());
     fetchLoginData(data)
       .then((res) => {
+        console.log(res);
         dispatch(fetchingLoginSuccess(res));
       })
       .catch((err) => {

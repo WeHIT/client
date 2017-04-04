@@ -19,7 +19,7 @@ renderScene = (route, navigator) => {
 export default function AppContainer () {
   return (
     <Navigator
-      initialRoute={routeMap.login}
+      initialRoute={routeMap.home}
       configureScene={configureScene}
       renderScene={renderScene} />   
   )

@@ -6,18 +6,21 @@ import {
   View,
   Image,
   Dimensions,
-  ScrollView
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 
 
 export default class Tip extends Component {
 
   static defaultProps = {
-    text: '点我哦'
+    text: '点我哦',
+    clickCb: () => {},
   };
 
   static propTypes = {
-    text: PropTypes.string
+    text: PropTypes.string,
+    clickCb: PropTypes.func,
   };
 
   constructor(props) {
@@ -26,12 +29,15 @@ export default class Tip extends Component {
 
   render () {
     const {
-      text
+      text,
+      clickCb,
     } = this.props;
     return (
-      <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={e => clickCb(e, text)}>
         <Text style={styles.tipText}>{text}</Text>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
