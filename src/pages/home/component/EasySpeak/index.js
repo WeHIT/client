@@ -7,7 +7,7 @@ import {
   Image,
   Dimensions
 } from 'react-native';
-
+import HTMLView from 'react-native-htmlview';
 
 export default class EasySpeak extends Component {
   static defaultProps = {
@@ -35,7 +35,9 @@ export default class EasySpeak extends Component {
         <View
           style={[styles.commonViewStyle,
             pos === 'left' ? styles.leftViewStyle : styles.rightViewStyle]}>
-          <Text style={styles.textStyle}>{text}</Text>
+          <HTMLView 
+           style={styles.textStyle}
+           value={text} />
         </View>
       </View>
     );

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import {
   AppRegistry,
   StyleSheet,
@@ -13,7 +15,7 @@ import {
 import EasySpeak from '../../component/EasySpeak';
 import MultiImgText from '../../component/MultiImgText';
 
-export default class SpeakFlow extends Component {
+class SpeakFlow extends Component {
 
   constructor(props) {
     super(props);
@@ -49,12 +51,28 @@ export default class SpeakFlow extends Component {
   }
 
   render() {
+    const {
+      speakData
+    } = this.props;
     return (
       <View style={[styles.container]}>
         <ScrollView
           ref={ref => this.scrollView  = ref}
         >
-          <View style={styles.lineView}>
+          {
+            speakData && speakData.data && speakData.data.length ? speakData.data.map((item, index) => {
+
+              return (
+                <View style={styles.lineView}>
+                  <EasySpeak
+                    pos='left'
+                    text={item}
+                  />
+                </View>
+              );
+            }) : null
+          }
+          {/*<View style={styles.lineView}>
             <EasySpeak
               pos='right'
               text='今天天气怎么样'
@@ -71,13 +89,29 @@ export default class SpeakFlow extends Component {
           </View>
           <View style={styles.lineView}>
             <MultiImgText />
-          </View>
+          </View>*/}
           <View onLayout={e => this.setState({scrollViewHeight: e.nativeEvent.layout.y})}/>
         </ScrollView>
       </View>
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    speakData: state.speakData,
+  };
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SpeakFlow);
 
 const styles = StyleSheet.create({
   container: {
