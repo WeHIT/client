@@ -13,7 +13,7 @@ export function fetchData(data) {
       .then(res => res.json())
       .then(res => {
         console.log(res);
-        return resolve(res.data.data);
+        return resolve(res.msg);
       });
   })
 }

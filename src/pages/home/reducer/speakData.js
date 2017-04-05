@@ -17,7 +17,7 @@ const speakDataReducer = handleActions({
   [actions.fetchingDataSuccess]: (state, action) => ({
     ...state,
     isFetching: false,
-    data: state.data.concat(action.payload),
+    data: state.data.concat(action.payload.data),
   }),
   [actions.fetchingDataFailure]: (state, action) => ({
     ...state,

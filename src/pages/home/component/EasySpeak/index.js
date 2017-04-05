@@ -78,6 +78,6 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 2,
   },
   textStyle: {
-    lineHeight: 20
+    //lineHeight: 20
   }
 });

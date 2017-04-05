@@ -7,23 +7,29 @@ import {
   Image,
 } from 'react-native';
 
-const data = [{
-  title: '这是标题1',
-  img: 'https://cloud.githubusercontent.com/assets/7554325/23789013/047cc03a-05b4-11e7-92ac-f4d31f534e17.png'
-}, {
-  title: '这是标题2',
-  img: 'https://cloud.githubusercontent.com/assets/7554325/23789013/047cc03a-05b4-11e7-92ac-f4d31f534e17.png'
-}, {
-  title: '这是标题2',
-  img: 'https://cloud.githubusercontent.com/assets/7554325/23789013/047cc03a-05b4-11e7-92ac-f4d31f534e17.png'
-}, {
-  title: '这是标题2',
-  img: 'https://cloud.githubusercontent.com/assets/7554325/23789013/047cc03a-05b4-11e7-92ac-f4d31f534e17.png'
-},]
 
 import SingleImgText from '../SingleImgText'
 export default class MultiImgText extends Component {
+
+  static defaultProps = {
+    data: [{
+            title: '这是标题1',
+            img: 'https://cloud.githubusercontent.com/assets/7554325/23789013/047cc03a-05b4-11e7-92ac-f4d31f534e17.png'
+          }, {
+            title: '这是标题2',
+            img: 'https://cloud.githubusercontent.com/assets/7554325/23789013/047cc03a-05b4-11e7-92ac-f4d31f534e17.png'
+          }, {
+            title: '这是标题2',
+            img: 'https://cloud.githubusercontent.com/assets/7554325/23789013/047cc03a-05b4-11e7-92ac-f4d31f534e17.png'
+          }, {
+            title: '这是标题2',
+            img: 'https://cloud.githubusercontent.com/assets/7554325/23789013/047cc03a-05b4-11e7-92ac-f4d31f534e17.png'
+          },]
+  }
   render() {
+    const {
+      data
+    } = this.props;
     return (
       <View style={styles.container}>
         {

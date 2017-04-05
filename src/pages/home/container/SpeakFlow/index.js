@@ -61,15 +61,33 @@ class SpeakFlow extends Component {
         >
           {
             speakData && speakData.data && speakData.data.length ? speakData.data.map((item, index) => {
-
-              return (
-                <View style={styles.lineView}>
-                  <EasySpeak
-                    pos='left'
-                    text={item}
-                  />
-                </View>
-              );
+              if(item.type === 'express') {
+                return (
+                  <View 
+                    key={index}
+                    style={styles.lineView}>
+                    <EasySpeak
+                      pos={item.data.position}
+                      text={item.data.content}
+                    />
+                  </View>
+                );
+              } else if (item.type === 'news') {
+                const data = item.data.content.map((inItem, i) => {
+                  return {
+                    title: inItem.title,
+                    img: inItem.firstImg
+                  }
+                })
+                return (
+                  <View 
+                    key={index}
+                    style={styles.lineView}>
+                    <MultiImgText 
+                      data={data} />
+                  </View>
+                );
+              }
             }) : null
           }
           {/*<View style={styles.lineView}>
@@ -119,6 +137,6 @@ const styles = StyleSheet.create({
     paddingTop: 0
   },
   lineView: {
-    marginTop: 20
+    marginTop: 20,
   },
 });
