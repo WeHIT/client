@@ -14,6 +14,7 @@ import {
 
 import EasySpeak from '../../component/EasySpeak';
 import MultiImgText from '../../component/MultiImgText';
+import Express from '../../component/Express';
 
 class SpeakFlow extends Component {
 
@@ -66,9 +67,8 @@ class SpeakFlow extends Component {
                   <View 
                     key={index}
                     style={styles.lineView}>
-                    <EasySpeak
-                      pos={item.data.position}
-                      text={item.data.content}
+                    <Express
+                      data={item.data.content}
                     />
                   </View>
                 );
