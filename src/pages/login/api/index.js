@@ -14,7 +14,7 @@ export function fetchLoginData(data) {
       })
       .then(res => res.json())
       .then(res => {
-        return resolve(res.data);
+        return resolve(res.msg);
       });
   });
 }
@@ -35,7 +35,7 @@ export function fetchRegData(data) {
     })
     .then(res => res.json())
     .then(res => {
-      return resolve(res.data);
+      return resolve(res.msg);
     });
   });
 }
