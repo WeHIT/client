@@ -2,6 +2,7 @@ import urlMap from '@url';
 import md5 from 'md5';
 export function fetchLoginData(data) {
   return new Promise((resolve, reject) => {
+    console.log(md5(data.password))
     fetch(urlMap.login, {
       method: 'POST',
       headers: {

@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 
 import urlMap from '@url';
+import storage from '@storage';
 
 import Header from '../../component/Header';
 import Fields from '../fields';

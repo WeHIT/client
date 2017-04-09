@@ -1,12 +1,21 @@
 import urlMap from '@url';
+import storage from '@storage';
 
 export function fetchData(data) {
   return new Promise((resolve, reject) => {
-    fetch(urlMap.api, {
+    storage.load({
+      key: 'token',
+    }).then(ret => {
+      console.log('请求数据');
+      console.log({
+        auth: `Bearer ${ret}`,
+        body: data,
+      });
+      fetch(urlMap.api, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6MTEzMDMxMDEyOCwiaWF0IjoxNDkxMjIyNDIyfQ.C0qnB-_tBWyGxeww-6W1BzBjHSHw_peePqgAJhnB9WY',
+        'Authorization': `Bearer ${ret}`,
       },
       body: JSON.stringify(data),
       })
@@ -15,5 +24,6 @@ export function fetchData(data) {
         console.log(res);
         return resolve(res.msg);
       });
+    });
   })
 }

@@ -32,20 +32,17 @@ import {
 } from '../../action';
 
 const collegeList = [{
-  key: '计算机',
+  key: 'cs',
   value: '计算机学院'
 }, {
-  key: '管理学院',
-  value: '经济管理学院'
+  key: 'som',
+  value: '管理学院'
 }, {
-  key: '管理学院',
-  value: '经济管理学院'
+  key: 'sa',
+  value: '航天学院'
 }, {
-  key: '管理学院',
-  value: '经济管理学院'
-}, {
-  key: '管理学院',
-  value: '经济管理学院'
+  key: 'fls',
+  value: '外国语学院'
 }];
 
 class Fields extends Component {
@@ -86,7 +83,7 @@ class Fields extends Component {
       this.refs.toast.show(login.data.text);
       storage.save({
         key: 'token',
-        rawData: login.data.token
+        rawData: login.data.token,
       });
       storage.load({
         key: 'token',
