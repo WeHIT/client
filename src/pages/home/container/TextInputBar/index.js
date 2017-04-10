@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import {
   AppRegistry,
   StyleSheet,
@@ -8,10 +9,13 @@ import {
   Dimensions,
   ScrollView,
   TextInput,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  TouchableOpacity,
 } from 'react-native';
 
-export default class TextInputBar extends Component {
+import { getData } from '../../action';
+
+class TextInputBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,11 +23,31 @@ export default class TextInputBar extends Component {
     }
   }
 
+  /**
+   * @desc textInput 的内容
+   * @param {sting} val 
+   */
   changeText(val) {
     this.setState({
       text: val
     })
+    console.log(val);
   }
+
+  /**
+   * @desc 点击发送按钮
+   */
+  clickBtn() {
+    console.log('发送data');
+    console.log(this.state.text);
+    this.props.getData({
+      command: this.props.nextCommand.data,
+      options: {
+        data: this.state.text
+      }
+    });
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -33,13 +57,34 @@ export default class TextInputBar extends Component {
             onChangeText={(val) => this.changeText(val)}
             value={this.state.text} />
           </View>
-          <View style={styles.buttonTextContainer}>
+          <TouchableOpacity
+            style={styles.buttonTextContainer}
+            onPress={e => this.clickBtn(e)} >
             <Text style={styles.buttonText}>发送</Text>
-          </View>
+          </TouchableOpacity>
       </View>
     );
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    nextCommand: state.nextCommand,
+  };
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    getData: (data) => {
+      dispatch(getData(data));
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(TextInputBar);
 
 const styles = StyleSheet.create({
   container: {

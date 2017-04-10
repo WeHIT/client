@@ -12,25 +12,8 @@ export default class Express extends Component {
   static defaultProps = {
     pos: 'left',
     data: {
-      len: 4,
+      // len: 0,
       data: [{
-        logisticCode: 123456789,
-        shipperName: '韵达快递',
-        status: '在途中',
-        traces: [{
-          AcceptTime: '2017-03-04 16:00',
-          AcceptStation: '在黑龙江哈尔滨工业大学进行签收扫描，请你注意查收'
-        }, {
-          AcceptTime: '2017-03-04 16:00',
-          AcceptStation: '在黑龙江哈尔滨工业大学进行签收扫描，请你注意查收'
-        }, {
-          AcceptTime: '2017-03-04 16:00',
-          AcceptStation: '在黑龙江哈尔滨工业大学进行签收扫描，请你注意查收'
-        }, {
-          AcceptTime: '2017-03-04 16:00',
-          AcceptStation: '在黑龙江哈尔滨工业大学进行签收扫描，请你注意查收'
-        }]
-      }, {
         logisticCode: 123456789,
         shipperName: '韵达快递',
         status: '在途中',
@@ -65,15 +48,19 @@ export default class Express extends Component {
       pos,
       data
     } = this.props;
+    console.log(data);
     return (
       <View style={[styles.wrapView,
         pos === 'left' ? styles.leftWrapView : styles.rightWrapView]}>
         <View
           style={[styles.commonViewStyle,
             pos === 'left' ? styles.leftViewStyle : styles.rightViewStyle]}>
-          <View style={styles.summTipViewStyle}>
-            <Text style={styles.summTip}>你有 {data.len} 个快递正在路上...</Text>
-          </View>
+            {
+              data.len ?
+              <View style={styles.summTipViewStyle}>
+                <Text style={styles.summTip}>你有 {data.len} 个快递正在路上...</Text>
+              </View> : null
+            }
           {
             data.data && data.data.length ? data.data.map((item, index) => {
               return (
@@ -81,7 +68,7 @@ export default class Express extends Component {
                   <View style={styles.infoViewStyle}>
                     <View style={styles.infoTextViewStyle}>
                       <Text>{item.shipperName}：</Text>
-                      <Text style={styles.descTextStyle}>1234567890</Text>
+                      <Text style={styles.descTextStyle}>{item.logisticCode}</Text>
                     </View>
                     <View style={styles.infoImgViewStyle}>
                       <Image 

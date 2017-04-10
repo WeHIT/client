@@ -20,7 +20,7 @@ renderScene = (route, navigator) => {
 export default function AppContainer () {
   storage.save({
     key: 'token',
-    rawData: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6MTEzMDMxMDEyOCwiaWF0IjoxNDkxMjIyNDIyfQ.C0qnB-_tBWyGxeww-6W1BzBjHSHw_peePqgAJhnB9WY',
+    rawData: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InNoYWJpIiwiaWF0IjoxNDkxODI1Njg5fQ.FD1_u1gGMUni2_eohxx6w_CgyV9vf0bbVSZkD4CjPqo'
   });
   console.log('storage 初始化成功');
   storage.load({

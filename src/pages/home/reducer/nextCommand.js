@@ -9,7 +9,7 @@ const initState = {
 const speakDataReducer = handleActions({
   [actions.fetchingDataSuccess]: (state, action) => ({
     ...state,
-    data: action.payload.type,
+    data: action.payload.nextCommand,
   }),
 }, initState);
 

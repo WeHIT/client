@@ -87,6 +87,17 @@ class SpeakFlow extends Component {
                       data={data} />
                   </View>
                 );
+              } else if (item.type === 'normalDialog') {
+                return (
+                  <View
+                    key={index}          
+                    style={styles.lineView}>
+                    <EasySpeak
+                      pos={item.data.position}
+                      text={item.data.content}
+                    />
+                  </View>
+                );
               }
             }) : null
           }
