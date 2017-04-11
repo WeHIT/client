@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   AppRegistry,
   StyleSheet,
@@ -19,7 +20,11 @@ import TipBar from '../TipBar';
 import TextInputBar from '../TextInputBar';
 import KeyboardSpacer from '@common/component/KeyboardSpacer';
 
-export default class App extends Component {
+import {
+  getNewGeo,
+} from '../../action';
+
+class App extends Component {
 
   constructor(props) {
     super(props);
@@ -38,6 +43,25 @@ export default class App extends Component {
     this.keyboardHide = Keyboard.addListener('keyboardWillHide',
       this.resetKeyboardSpace.bind(this)
     );
+
+    // 定位相关
+    navigator.geolocation.getCurrentPosition((position) => {
+      var initialPosition = JSON.stringify(position);
+        this.props.getNewGeo({
+          lot: initialPosition.longitude,
+          lat: initialPosition.latitude
+        });
+      }, error => alert(error.message),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+    );
+    this.watchID = navigator.geolocation.watchPosition((position) => {
+      var lastPosition = JSON.stringify(position);
+      console.log(lastPosition);
+      this.props.getNewGeo({
+        lot: lastPosition.longitude,
+        lat: lastPosition.latitude
+      });
+    });
   }
 
   updateKeyboardSpace(frames){
@@ -82,6 +106,24 @@ export default class App extends Component {
   }
 }
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+   geo: state.geo
+  };
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    getNewGeo: data => {
+      dispatch(getNewGeo(data))
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(App);
 
 const styles = StyleSheet.create({
   container: {

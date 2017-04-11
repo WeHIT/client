@@ -22,11 +22,11 @@ const store = configureStore({}, hashHistory);
 import App from './container/app';
 
 export default class Home extends Component {
-
   render() {
     const {
       ...other
     } = this.props;
+    console.log(111)
     return (
       <Provider store={store}>
         <App 

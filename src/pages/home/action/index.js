@@ -22,3 +22,6 @@ export function getData(data) {
       });
   };
 }
+
+export const getNewCity = createAction(types.GET_NEW_CITY, data => data);
+export const getNewGeo = createAction(types.GET_NEW_GEO, data => data)

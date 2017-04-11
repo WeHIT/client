@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "postinstall": "remotedev-debugger --hostname 127.0.0.1 --port 8081 --injectserver"
+    "test": "jest"
   },
   "dependencies": {
     "md5": "^2.2.1",
