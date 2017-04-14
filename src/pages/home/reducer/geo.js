@@ -16,7 +16,7 @@ const geoReducer = handleActions({
   }),
   [actions.getNewCity]: (state, action) => ({
     ...state,
-    city: state.city,
+    city: action.payload.city,
   }),
 }, initState);
 

@@ -14,12 +14,14 @@ import {
 export default class Tip extends Component {
 
   static defaultProps = {
-    text: '点我哦',
+    actionText: '点我哦',
+    descText: '你正在点我哦',
     clickCb: () => {},
   };
 
   static propTypes = {
-    text: PropTypes.string,
+    actionText: PropTypes.string,
+    descText: PropTypes.string,
     clickCb: PropTypes.func,
   };
 
@@ -29,14 +31,17 @@ export default class Tip extends Component {
 
   render () {
     const {
-      text,
+      actionText,
+      descText,
       clickCb,
     } = this.props;
     return (
       <TouchableOpacity
         style={styles.container}
-        onPress={e => clickCb(e, text)}>
-        <Text style={styles.tipText}>{text}</Text>
+        onPress={e => clickCb(e, {actionText, descText})}>
+        <Text style={styles.tipText}>
+          {actionText}
+        </Text>
       </TouchableOpacity>
     );
   }

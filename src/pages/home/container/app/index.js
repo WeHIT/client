@@ -46,20 +46,18 @@ class App extends Component {
 
     // 定位相关
     navigator.geolocation.getCurrentPosition((position) => {
-      var initialPosition = JSON.stringify(position);
+      console.log(position)
         this.props.getNewGeo({
-          lot: initialPosition.longitude,
-          lat: initialPosition.latitude
+          lon: position.coords.longitude,
+          lat: position.coords.latitude
         });
       }, error => alert(error.message),
       { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
     );
     this.watchID = navigator.geolocation.watchPosition((position) => {
-      var lastPosition = JSON.stringify(position);
-      console.log(lastPosition);
       this.props.getNewGeo({
-        lot: lastPosition.longitude,
-        lat: lastPosition.latitude
+        lon: position.coords.longitude,
+        lat: position.coords.latitude
       });
     });
   }

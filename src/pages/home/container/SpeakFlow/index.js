@@ -49,20 +49,6 @@ class SpeakFlow extends Component {
     //     animated: true
     //   })
     // }
-navigator.geolocation.getCurrentPosition(
-      (position) => {
-        var initialPosition = JSON.stringify(position);
-        console.log(initialPosition);
-        //this.setState({initialPosition});
-      },
-      (error) => alert(error.message),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-    );
-    this.watchID = navigator.geolocation.watchPosition((position) => {
-      var lastPosition = JSON.stringify(position);
-      console.log(lastPosition);
-      //this.setState({lastPosition});
-    });
   }
 
   componentWillUnmount() {

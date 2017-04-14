@@ -14,39 +14,53 @@ import { getData } from '../../action';
 
 import Tip from '../../component/Tip';
 
-const data = [
-  '获取天气',
-  '查询快递',
-  '获取新闻',
-  '获取饭卡信息',
-  '获取新闻',
-  '获取新闻',
-  '获取新闻',
-  '获取新闻',
-  '获取新闻',
-]
+const data = [{
+  actionText: '获取天气',
+  descText: '我要查询天气',
+}, {
+  actionText: '查询快递',
+  descText: '我要查询快递',
+}, {
+  actionText: '查询新闻',
+  descText: '我要查新闻',
+}];
+
 class TipBar extends Component {
 
   clickTipBar(e, data) {
+    const {
+      lat,
+      lon,
+    } = this.props.geo;
     this.props.getData({
       command: "common",
       options: {
-        data,
+        data: data.actionText,
+        descText: data.descText,
+        location: {
+          lat,
+          lon,
+        },
       }
     });
   }
   render () {
+    const {
+      tipBar
+    } = this.props;
     return (
       <View style={styles.container}>
         <ScrollView 
           horizontal={true} >
           {
-            data.length ? data.map((item, index) => {
+            tipBar.data.length ? tipBar.data.map((item, index) => {
+              console.log(item)
               return (
                 <Tip
-                  clickCb={(e, text) => this.clickTipBar(e, text)}
+                  clickCb={(e, textObj) => this.clickTipBar(e, textObj)}
                   key={index}
-                  text={item}/>
+                  actionText={item.actionText}
+                  descText={item.descText} />
               )
             }) : null
           }
@@ -58,7 +72,8 @@ class TipBar extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    speakData: state.speakData,
+    geo: state.geo,
+    tipBar: state.tipBar,
   };
 }
 
