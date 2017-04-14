@@ -1,3 +1,7 @@
-import logger from './logger';
+import loggerMiddleware from './logger';
+import fetchDataMiddleware from './fetchData';
 
-export  { logger };
+export  {
+  loggerMiddleware,
+  fetchDataMiddleware,
+};

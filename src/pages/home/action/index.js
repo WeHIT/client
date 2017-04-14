@@ -1,28 +1,30 @@
 import { createAction } from "redux-actions";
 
 import * as types from '../constant';
+
 import {
   fetchData,
 } from '../api';
 
 export const fetchingData = createAction(types.FETCHING_DATA, data => {
   // 构造 data，和返回的一样
-  console.log(data)
-  return {
-    data: [{
-      type: 'normalDialog',
-      data: {
-        content: data.options.descText || data.options.data,
-        position: 'right'
-      },
-    }, {
-      type: 'normalDialog',
-      data: {
-        content: 'WeHIT 正在输入内容...',
-        position: 'left',
-      },
-    }],
-  };
+  // console.log(data)
+  return data;
+  // return {
+  //   data: [{
+  //     type: 'normalDialog',
+  //     data: {
+  //       content: data.options.descText || data.options.data,
+  //       position: 'right'
+  //     },
+  //   }, {
+  //     type: 'normalDialog',
+  //     data: {
+  //       content: 'WeHIT 正在输入内容...',
+  //       position: 'left',
+  //     },
+  //   }],
+  // };
 });
 export const fetchingDataSuccess = createAction(types.FETCHING_DATA_SUCCESS, data => data);
 export const fetchingDataFailure = createAction(types.FETCHING_DATA_FAILURE);
