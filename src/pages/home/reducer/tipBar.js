@@ -19,7 +19,7 @@ const tipBarReducer = handleActions({
   [actions.fetchingDataSuccess]: (state, action) => {
     return action.payload.tipBar ? {
       ...state,
-      data: state.data.concat(action.payload.tipBar),
+      data: action.payload.tipBar,
     } : {
       ...state,
     }
