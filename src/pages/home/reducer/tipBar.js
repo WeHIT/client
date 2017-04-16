@@ -24,6 +24,10 @@ const tipBarReducer = handleActions({
       ...state,
     }
   },
+  [actions.backInitTipBar]: (state, action) => ({
+    ...state,
+    data: initState.data,
+  }),
 }, initState);
 
 export default tipBarReducer;

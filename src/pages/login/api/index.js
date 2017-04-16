@@ -13,7 +13,11 @@ export function fetchLoginData(data) {
         password: md5(data.password),
         }),
       })
-      .then(res => res.json())
+      .then(res => {
+        console.log('转换 json 之前的数据');
+        console.log(res);
+        return res.json()
+      })
       .then(res => {
         return resolve(res.msg);
       });

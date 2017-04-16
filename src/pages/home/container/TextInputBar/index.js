@@ -46,6 +46,9 @@ class TextInputBar extends Component {
         data: this.state.text
       }
     });
+    this.setState({
+      text: '',
+    })
   }
 
   render () {

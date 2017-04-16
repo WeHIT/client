@@ -10,7 +10,10 @@ import {
   ScrollView
 } from 'react-native';
 
-import { getData } from '../../action';
+import {
+  getData,
+  backInitTipBar,
+} from '../../action';
 
 import Tip from '../../component/Tip';
 
@@ -32,17 +35,22 @@ class TipBar extends Component {
       lat,
       lon,
     } = this.props.geo;
-    this.props.getData({
-      command: "common",
-      options: {
-        data: data.actionText,
-        descText: data.descText,
-        location: {
-          lat,
-          lon,
-        },
-      }
-    });
+    // 返回情况下不 push 消息
+    if (data.actionText !== '返回') {
+      this.props.getData({
+        command: "common",
+        options: {
+          data: data.actionText,
+          descText: data.descText,
+          location: {
+            lat,
+            lon,
+          },
+        }
+      });
+    } else {
+      this.props.backInitTipBar();
+    }
   }
   render () {
     const {
@@ -51,7 +59,15 @@ class TipBar extends Component {
     return (
       <View style={styles.container}>
         <ScrollView 
-          horizontal={true} >
+          horizontal={true}>
+          <Tip
+            type='img'
+            img={require('./tipBack.png')}
+            clickCb={(e, textObj) => this.clickTipBar(e, textObj)}
+            key='back'
+            actionText='返回'
+            descText=''
+          />
           {
             tipBar.data.length ? tipBar.data.map((item, index) => {
               console.log(item)
@@ -81,6 +97,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     getData: (data) => {
       dispatch(getData(data));
+    },
+    backInitTipBar: () => {
+      dispatch(backInitTipBar());
     }
   }
 }
@@ -92,6 +111,10 @@ export default connect(
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 8
+    paddingTop: 8,
+  },
+  tipImage: {
+    width: 20,
+    height: 20,
   }
 });

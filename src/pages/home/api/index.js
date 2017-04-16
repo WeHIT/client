@@ -21,6 +21,7 @@ export function fetchData(data) {
       })
       .then(res => res.json())
       .then(res => {
+        console.log('api 数据返回信息: ');
         console.log(res);
         return resolve(res.msg);
       });
