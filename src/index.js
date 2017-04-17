@@ -30,7 +30,7 @@ export default function AppContainer () {
   });
   return (
     <Navigator
-      initialRoute={routeMap.home}
+      initialRoute={routeMap.intro}
       configureScene={configureScene}
       renderScene={renderScene} />   
   )
