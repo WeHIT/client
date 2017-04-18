@@ -11,8 +11,11 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   ScrollView,
-  TextInput
+  TextInput,
+  Platform,
 } from 'react-native';
+
+import { Geolocation } from 'react-native-baidu-map';
 
 import HeaderBar from '../HeaderBar';
 import SpeakFlow from '../SpeakFlow';
@@ -45,21 +48,37 @@ class App extends Component {
     );
 
     // 定位相关
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position)
+    if(Platform.OS === 'ios') {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position)
+        console.log(Platform.OS);
+          this.props.getNewGeo({
+            lon: position.coords.longitude,
+            lat: position.coords.latitude
+          });
+        }, error => alert(error.message),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      );
+      this.watchID = navigator.geolocation.watchPosition((position) => {
         this.props.getNewGeo({
           lon: position.coords.longitude,
           lat: position.coords.latitude
         });
-      }, error => alert(error.message),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
-    this.watchID = navigator.geolocation.watchPosition((position) => {
-      this.props.getNewGeo({
-        lon: position.coords.longitude,
-        lat: position.coords.latitude
       });
-    });
+    } else {
+      console.log('这是android');
+      Geolocation.getCurrentPosition()
+        .then(position => {
+          console.log(position)
+          // 有时候没有定位
+          if(position.longitude !== 5e-324) {
+            this.props.getNewGeo({
+              lon: position.longitude,
+              lat: position.latitude,
+            })
+          }
+        })
+    }
   }
 
   updateKeyboardSpace(frames){

@@ -1,4 +1,4 @@
-const BASE_URL = 'http://127.0.0.1:7001';
+const BASE_URL = 'http://172.17.27.177:7001';
 
 const urlMap = {
   'login': `${BASE_URL}/login`,
