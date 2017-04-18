@@ -12,6 +12,9 @@ const initState = {
   }, {
     actionText: '获取新闻',
     descText: '我要查新闻',
+  }, {
+    actionText: '查饭卡',
+    descText: '我要查饭卡',
   }],
 }
 
