@@ -42,7 +42,7 @@ class App extends Component {
           middleText="[求购][C++ primer/C++ primer plus/Effective C++]"
           rightText=""
           leftCb={ this.backToHome} />
-        <Post style={styles.postView}/>
+        <Post style={styles.postView} {...other}/>
         <TextInputBar />
       </View>
     );

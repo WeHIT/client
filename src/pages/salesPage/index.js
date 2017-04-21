@@ -16,6 +16,10 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import configureStore from "./store";
+
+const store = configureStore({}, hashHistory);
+
 import App from './container/app';
 
 class NewsPage extends Component {
@@ -24,8 +28,10 @@ class NewsPage extends Component {
       ...other
     } = this.props;
     return(
-      <App
-        {...other} />
+      <Provider store={store}>
+        <App
+          {...other} />
+      </Provider>
     );
   }
 }

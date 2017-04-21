@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Provider } from "react-redux";
+import { Provider, connect } from "react-redux";
 import { hashHistory } from "react-router";
 import {
   AppRegistry,
@@ -17,144 +17,144 @@ import {
   Dimensions
 } from 'react-native';
 
+import {
+  getData
+} from '../../action';
+
 import HTMLView from 'react-native-htmlview';
 
 const value = '求购：\r\n1. C++ Primer 中文版(第5版)  Stanley B. Lippman, Josee Lajoie, Barbara E. 王刚 / 杨巨峰 ，电子工业出版社。\r\n2. C++ Primer plus 中文版(第6版)，Stephen Prata（史蒂芬 普拉达），张海龙 袁国忠，人民邮电出版社。\r\n3. Effective C++ 中文版:改善程序与设计的55个具体做法(第3版) ，(美)梅耶(Scott Meyers) 著;侯捷 译，电子工业出版社。\r\n\r\n谢谢大家帮忙！\r\n联系方式：电话：15765574127';
 
 class Post extends Component {
+
+  componentDidMount() {
+    console.log('组件 props')
+    console.log(this.props);
+    const {
+      id,
+      type
+    } = this.props;
+    this.props.getData({
+      command: 'getPost',
+      options: {
+        type,
+        id,
+      }
+    });
+  }
+
   render() {
     const {
+      post,
       ...other
     } = this.props;
     return(
       <ScrollView style={styles.postContainer}>
-        <View style={styles.cardContainer}>
-          <View style={styles.postHeaderContainer}>
-            <View style={styles.titleContainer}>
-              <Text style={styles.titleText}>求购求购这一定是一个标题标题标题哈哈哈哈求购求购这一定是一个标题标题标题哈哈哈哈</Text>
-            </View>
-            <View style={styles.userContainer}>
-              <View style={styles.avatarContainer}>
-                <Image
-                  style={styles.avatarImg}
-                  source={{uri: 'http://pt.hit.edu.cn/avatars/10239_8de65d68667768797d64d16661b3f9b9'}}
-                />
+        {
+          post.isFetching || post.data == null ?
+          <View><Text>正在加载中...</Text></View> : (
+            <View>
+              <View style={styles.cardContainer}>
+                <View style={styles.postHeaderContainer}>
+                  <View style={styles.titleContainer}>
+                    <Text style={styles.titleText}>{post.data.subject}</Text>
+                  </View>
+                  <View style={styles.userContainer}>
+                    <View style={styles.avatarContainer}>
+                      <Image
+                        style={styles.avatarImg}
+                        source={{uri: post.data.comment[0].avatar}}
+                      />
+                    </View>
+                    <View style={styles.nickNameContainer}>
+                      <Text style={styles.nickNameText}>{post.data.comment[0].username}</Text>
+                    </View>
+                  </View>
+                </View>
+                
+                <View style={styles.postContentContainer}>
+                  <HTMLView 
+                    value={post.data.comment[0].body}
+                  />
+                  <View style={styles.postCopyRightContainer}>
+                    <Text style={styles.postCopyRightText}>清影PT提供交易支持</Text>
+                  </View>
+                </View>
               </View>
-              <View style={styles.nickNameContainer}>
-                <Text style={styles.nickNameText}>rccoder</Text>
-              </View>
+              {
+                post.data.comment.length >=2 ? (
+                    <View style={styles.commentHeaderContainer}>
+                      <View>
+                        <Image
+                          style={styles.commentHeaderImg}
+                          source={require('./comment.png')}
+                        />
+                      </View>
+                      <View>
+                        <Text style={styles.commentHeaderText}>评论</Text>
+                      </View>
+                    </View>
+                  ) : null   
+              }
+              {
+                post.data.comment.map((item, index) => {
+                  if(index >= 1) {
+                    return (
+                      <View
+                        key={index}
+                        style={[styles.cardContainer, styles.commentCardContainer]}>
+                        <View style={styles.userContainer}>
+                          <View style={styles.avatarContainer}>
+                            <Image
+                              style={[styles.avatarImg, styles.commentAvatarImg]}
+                              source={{uri: item.avatar}}
+                            />
+                          </View>
+                          <View style={styles.nickNameContainer}>
+                            <Text style={[styles.nickNameText, styles.commentNickNameText]}>{item.username}</Text>
+                          </View>
+                        </View>
+                        <View style={[styles.postContentContainer, styles.commentPostContentContainer]}>
+                          <HTMLView style={[styles.postContentHtml]}
+                            value={item.body}
+                          />
+                          <View style={styles.postCopyRightContainer}>
+                            <Text style={styles.postCopyRightText}>来自清影PT</Text>
+                          </View>
+                        </View>
+                      </View>
+                    );
+                  }
+                })
+              }
             </View>
-          </View>
-          
-          <View style={styles.postContentContainer}>
-            <HTMLView 
-              value={value}
-            />
-            <View style={styles.postCopyRightContainer}>
-              <Text style={styles.postCopyRightText}>清影PT提供交易支持</Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.commentHeaderContainer}>
-          <View>
-            <Image
-              style={styles.commentHeaderImg}
-              source={require('./comment.png')}
-            />
-          </View>
-          <View>
-            <Text style={styles.commentHeaderText}>评论</Text>
-          </View>
-        </View>
-
-        <View style={[styles.cardContainer, styles.commentCardContainer]}>
-          <View style={styles.userContainer}>
-            <View style={styles.avatarContainer}>
-              <Image
-                style={[styles.avatarImg, styles.commentAvatarImg]}
-                source={{uri: 'http://pt.hit.edu.cn/avatars/10239_8de65d68667768797d64d16661b3f9b9'}}
-              />
-            </View>
-            <View style={styles.nickNameContainer}>
-              <Text style={[styles.nickNameText, styles.commentNickNameText]}>rccoder</Text>
-            </View>
-          </View>
-          <View style={[styles.postContentContainer, styles.commentPostContentContainer]}>
-            <HTMLView style={[styles.postContentHtml]}
-              value={'我要了，联系QQ'}
-            />
-            <View style={styles.postCopyRightContainer}>
-              <Text style={styles.postCopyRightText}>来自清影PT</Text>
-            </View>
-          </View>
-        </View>
-        <View style={[styles.cardContainer, styles.commentCardContainer]}>
-          <View style={styles.userContainer}>
-            <View style={styles.avatarContainer}>
-              <Image
-                style={[styles.avatarImg, styles.commentAvatarImg]}
-                source={{uri: 'http://pt.hit.edu.cn/avatars/10239_8de65d68667768797d64d16661b3f9b9'}}
-              />
-            </View>
-            <View style={styles.nickNameContainer}>
-              <Text style={[styles.nickNameText, styles.commentNickNameText]}>rccoder</Text>
-            </View>
-          </View>
-          <View style={[styles.postContentContainer, styles.commentPostContentContainer]}>
-            <HTMLView style={[styles.postContentHtml]}
-              value={'我要了，联系QQ'}
-            />
-            <View style={styles.postCopyRightContainer}>
-              <Text style={styles.postCopyRightText}>来自清影PT</Text>
-            </View>
-          </View>
-        </View>
-        <View style={[styles.cardContainer, styles.commentCardContainer]}>
-          <View style={styles.userContainer}>
-            <View style={styles.avatarContainer}>
-              <Image
-                style={[styles.avatarImg, styles.commentAvatarImg]}
-                source={{uri: 'http://pt.hit.edu.cn/avatars/10239_8de65d68667768797d64d16661b3f9b9'}}
-              />
-            </View>
-            <View style={styles.nickNameContainer}>
-              <Text style={[styles.nickNameText, styles.commentNickNameText]}>rccoder</Text>
-            </View>
-          </View>
-          <View style={[styles.postContentContainer, styles.commentPostContentContainer]}>
-            <HTMLView style={[styles.postContentHtml]}
-              value={'我要了，联系QQ'}
-            />
-            <View style={styles.postCopyRightContainer}>
-              <Text style={styles.postCopyRightText}>来自清影PT</Text>
-            </View>
-          </View>
-        </View>
-        <View style={[styles.cardContainer, styles.commentCardContainer]}>
-          <View style={styles.userContainer}>
-            <View style={styles.avatarContainer}>
-              <Image
-                style={[styles.avatarImg, styles.commentAvatarImg]}
-                source={{uri: 'http://pt.hit.edu.cn/avatars/10239_8de65d68667768797d64d16661b3f9b9'}}
-              />
-            </View>
-            <View style={styles.nickNameContainer}>
-              <Text style={[styles.nickNameText, styles.commentNickNameText]}>rccoder</Text>
-            </View>
-          </View>
-          <View style={[styles.postContentContainer, styles.commentPostContentContainer]}>
-            <HTMLView style={[styles.postContentHtml]}
-              value={'我要了，联系QQ'}
-            />
-            <View style={styles.postCopyRightContainer}>
-              <Text style={styles.postCopyRightText}>来自清影PT</Text>
-            </View>
-          </View>
-        </View>
+          )
+        }
       </ScrollView>
     );
   }
 }
+
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    post: state.post,
+  };
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    getData: (data) => {
+      dispatch(getData(data));
+    },
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Post);
+
 
 const styles = StyleSheet.create({
   postContainer: {
@@ -262,5 +262,3 @@ const styles = StyleSheet.create({
     color: 'rgb(100, 100, 100)',
   }
 });
-
-export default Post;
