@@ -26,6 +26,10 @@ export default class MultiImgText extends Component {
             img: 'https://cloud.githubusercontent.com/assets/7554325/23789013/047cc03a-05b4-11e7-92ac-f4d31f534e17.png'
           },]
   }
+
+  tap() {
+    console.log('taptaptap');
+  }
   render() {
     const {
       data

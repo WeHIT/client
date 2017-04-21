@@ -5,6 +5,7 @@ import {
   Text,
   View,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 
 
@@ -12,7 +13,8 @@ export default class HeaderBar extends Component {
   static defaultProps = {
     pos: 'bottom',
     img: require('./demo.png'),
-    title: 'Hello'
+    title: 'Hello',
+    tapCb: () => {},
   };
 
   static propTypes = {
@@ -20,12 +22,17 @@ export default class HeaderBar extends Component {
     img: PropTypes.string,
     title: PropTypes.string,
     hasBottomBorder: PropTypes.bool,
-    hasPaddingTop: PropTypes.bool
+    hasPaddingTop: PropTypes.bool,
+    tabCb: PropTypes.func,
   };
 
   constructor(props) {
     super(props);
   };
+
+  tapCb() {
+    console.log('tap single');
+  }
 
   render() {
     const {
@@ -33,12 +40,15 @@ export default class HeaderBar extends Component {
       img,
       title,
       hasBottomBorder,
-      hasPaddingTop
+      hasPaddingTop,
+      tapCb,
     } = this.props;
     return (
-      <View style={[styles.container,
-      hasBottomBorder ? styles.hasBottomBorder : null,
-      hasPaddingTop ? styles.hasPaddingTop : null]}>
+      <TouchableOpacity
+        style={[styles.container,
+          hasBottomBorder ? styles.hasBottomBorder : null,
+          hasPaddingTop ? styles.hasPaddingTop : null]}
+        onPress={e => this.tapCb(e)} >
         {
           pos === 'top' ?
           <View style={[styles.commonContainer, styles.topContainer]}>
@@ -58,7 +68,7 @@ export default class HeaderBar extends Component {
               source={img ? {uri: img} : require('./demo.png')} />
           </View>
         }
-      </View>
+      </TouchableOpacity>
     );
   }
 }
