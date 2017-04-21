@@ -113,7 +113,8 @@ class App extends Component {
           {...other} />
         <SpeakFlow 
           keyboardHeight={keyboardHeight}
-          keyboardStatus={keyboardStatus} />
+          keyboardStatus={keyboardStatus}
+          {...other} />
         <TipBar />
         <TextInputBar style={styles.textInput} />
         <KeyboardSpacer

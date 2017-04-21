@@ -57,7 +57,8 @@ class SpeakFlow extends Component {
 
   render() {
     const {
-      speakData
+      speakData,
+      ...other,
     } = this.props;
     return (
       <View style={[styles.container]}>
@@ -80,7 +81,8 @@ class SpeakFlow extends Component {
                 const data = item.data.content.map((inItem, i) => {
                   return {
                     title: inItem.title,
-                    img: inItem.firstImg
+                    img: inItem.firstImg,
+                    targetUrl: inItem.targetUrl,
                   }
                 })
                 return (
@@ -88,7 +90,8 @@ class SpeakFlow extends Component {
                     key={index}
                     style={styles.lineView}>
                     <MultiImgText 
-                      data={data} />
+                      data={data}
+                      {...other} />
                   </View>
                 );
               } else if (item.type === 'normalDialog') {

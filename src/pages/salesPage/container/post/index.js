@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   postContainer: {
     paddingLeft: 6,
     paddingRight: 6,
-    paddingTop: 6,
+    paddingTop: 10,
     paddingBottom: 6,
     backgroundColor: 'rgb(238, 238, 238)',
     height: Dimensions.get('window').height - 160, // header 是 58

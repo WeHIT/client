@@ -15,6 +15,7 @@ export default class HeaderBar extends Component {
     img: require('./demo.png'),
     title: 'Hello',
     tapCb: () => {},
+    targetUrl: '',
   };
 
   static propTypes = {
@@ -23,15 +24,16 @@ export default class HeaderBar extends Component {
     title: PropTypes.string,
     hasBottomBorder: PropTypes.bool,
     hasPaddingTop: PropTypes.bool,
-    tabCb: PropTypes.func,
+    tapCb: PropTypes.func, // press 回调
+    targetUrl: PropTypes.string, // target地址
   };
 
   constructor(props) {
     super(props);
   };
 
-  tapCb() {
-    console.log('tap single');
+  test() {
+    console.log('tttt')
   }
 
   render() {
@@ -42,13 +44,14 @@ export default class HeaderBar extends Component {
       hasBottomBorder,
       hasPaddingTop,
       tapCb,
+      targetUrl,
     } = this.props;
     return (
       <TouchableOpacity
         style={[styles.container,
           hasBottomBorder ? styles.hasBottomBorder : null,
           hasPaddingTop ? styles.hasPaddingTop : null]}
-        onPress={e => this.tapCb(e)} >
+        onPress={e => tapCb(e, targetUrl)} >
         {
           pos === 'top' ?
           <View style={[styles.commonContainer, styles.topContainer]}>
