@@ -14,56 +14,44 @@ import {
 } from 'react-native';
 
 class TextInputBar extends Component {
+
+  static propTypes = {
+    text: PropTypes.string,
+    btnText: PropTypes.string,
+    changeTextCb: PropTypes.func,
+    clickBtnCb: PropTypes.func,
+  }
+
+  static defaultProps = {
+    text: '',
+    btnText: '评论',
+    changeTextCb: () => {},
+    clickBtnCb: () => {},
+  }
+
   constructor(props) {
     super(props);
-    this.state = {
-      text: ''
-    }
   }
 
-  /**
-   * @desc textInput 的内容
-   * @param {sting} val 
-   */
-  changeText(val) {
-    this.setState({
-      text: val
-    })
-    console.log(val);
-  }
-
-  /**
-   * @desc 点击发送按钮
-   */
-  clickBtn() {
-    console.log('发送data');
-    console.log(this.state.text);
-    // this.props.getData({
-    //   command: this.props.nextCommand.data,
-    //   options: {
-    //     data: this.state.text
-    //   }
-    // });
-    this.setState({
-      text: '',
-    })
-  }
 
   render () {
     const {
-      btnText
+      text,
+      btnText,
+      changeTextCb,
+      clickBtnCb,
     } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.textInputContainer}>
           <TextInput
             style={styles.textInput}
-            onChangeText={(val) => this.changeText(val)}
-            value={this.state.text} />
+            onChangeText={(val) => changeTextCb(val)}
+            value={text} />
           </View>
           <TouchableOpacity
             style={styles.buttonTextContainer}
-            onPress={e => this.clickBtn(e)} >
+            onPress={e => clickBtnCb(e)} >
             <Text style={styles.buttonText}>{btnText}</Text>
           </TouchableOpacity>
       </View>

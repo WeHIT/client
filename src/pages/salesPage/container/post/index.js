@@ -92,9 +92,12 @@ class Post extends Component {
                     value={post.data.comment[0].body}
                     renderNode={renderNode}
                   />
-                  <View style={styles.postCopyRightContainer}>
-                    <Text style={styles.postCopyRightText}>清影PT提供交易支持</Text>
-                  </View>
+                  {
+                    post.data.comment[0].fromPt === 'yes' ?
+                    <View style={styles.postCopyRightContainer}>
+                      <Text style={styles.postCopyRightText}>清影PT提供交易支持</Text>
+                    </View> : null
+                  }
                 </View>
               </View>
               {
@@ -134,9 +137,12 @@ class Post extends Component {
                           <HTMLView style={[styles.postContentHtml]}
                             value={item.body}
                           />
-                          <View style={styles.postCopyRightContainer}>
-                            <Text style={styles.postCopyRightText}>来自清影PT</Text>
-                          </View>
+                          {
+                            item.fromPt === 'yes' ?
+                            <View style={styles.postCopyRightContainer}>
+                              <Text style={styles.postCopyRightText}>来自清影PT</Text>
+                            </View> : null
+                          }
                         </View>
                       </View>
                     );
