@@ -25,6 +25,21 @@ import HTMLView from 'react-native-htmlview';
 
 const value = '求购：\r\n1. C++ Primer 中文版(第5版)  Stanley B. Lippman, Josee Lajoie, Barbara E. 王刚 / 杨巨峰 ，电子工业出版社。\r\n2. C++ Primer plus 中文版(第6版)，Stephen Prata（史蒂芬 普拉达），张海龙 袁国忠，人民邮电出版社。\r\n3. Effective C++ 中文版:改善程序与设计的55个具体做法(第3版) ，(美)梅耶(Scott Meyers) 著;侯捷 译，电子工业出版社。\r\n\r\n谢谢大家帮忙！\r\n联系方式：电话：15765574127';
 
+function renderNode(node, index) {
+  console.log(node)
+  if (node.name == 'img') {
+    return (
+      <View key={index} style={{marginBottom: 10}}>
+        <Image
+          style={{width: 200, height: 200}}
+          source={{uri: `https:${node.attribs.src.trim()}`}}
+        />
+      </View>
+    );
+  }
+}
+
+
 class Post extends Component {
 
   componentDidMount() {
@@ -75,6 +90,7 @@ class Post extends Component {
                 <View style={styles.postContentContainer}>
                   <HTMLView 
                     value={post.data.comment[0].body}
+                    renderNode={renderNode}
                   />
                   <View style={styles.postCopyRightContainer}>
                     <Text style={styles.postCopyRightText}>清影PT提供交易支持</Text>
