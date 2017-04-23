@@ -49,6 +49,15 @@ export default class MultiImgText extends Component {
           type,
         }
       });
+    } else if (type === 'news') {
+      console.log(`newsId:${id}`);
+      this.props.navigator.push({
+        ...routeMap.newsPage,
+        params: {
+          id,
+          type,
+        }
+      })
     }
   }
 

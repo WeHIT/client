@@ -22,7 +22,7 @@ const store = configureStore({}, hashHistory);
 
 import App from './container/app';
 
-class salesPage extends Component {
+class NewsPage extends Component {
   render() {
     const {
       ...other
@@ -36,4 +36,4 @@ class salesPage extends Component {
   }
 }
 
-export default salesPage;
+export default NewsPage;
