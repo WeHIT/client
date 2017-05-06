@@ -17,7 +17,7 @@ export default function configureStore(initialState, history) {
     fetchDataMiddleware,
     loggerMiddleware,
     routerMiddleware(history)];
-    
+
   const store = createStore(
     rootReducer,
     initialState,

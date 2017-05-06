@@ -14,7 +14,7 @@ import routeMap from '@router';
 const data = [{
   img: require('./WeHITQ.png'),
   title: '新一代的交互体验',
-  desc: '享受 Sari、Contana、阿里小蜜般的交互体验',
+  desc: '享 Sari、Contana、阿里小蜜般的交互体验',
   bgColor: '#fa931d'
 }, {
   img: require('./WeHITQ.png'),
@@ -24,11 +24,11 @@ const data = [{
 }]
 
 export default class Intro extends Component {
-  
+
   doneBtnHandle = () => {
     this.props.navigator.push(routeMap.home)
   }
-  
+
   render () {
     return (
       <AppIntro
@@ -42,10 +42,10 @@ export default class Intro extends Component {
       {
         data.map((item, index) => {
         return (
-          <View 
+          <View
             style={[styles.slide,{ backgroundColor: `${item.bgColor}` }]}
             key={index}>
-            <Image 
+            <Image
               style={styles.img}
               source={item.img}
             />
