@@ -36,7 +36,7 @@ class App extends Component{
   render() {
     return (
       <Navigator
-        initialRoute={routeMap.home}
+        initialRoute={routeMap.intro}
         configureScene={configureScene}
         renderScene={renderScene} />
     )
