@@ -9,6 +9,8 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.microsoft.codepush.react.CodePush;
+
 import org.lovebing.reactnative.baidumap.BaiduMapPackage;
 
 import java.util.Arrays;
@@ -31,7 +33,9 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-              new MainReactPackage(), new BaiduMapPackage(getApplicationContext())
+              new MainReactPackage(),
+              new CodePush(getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
+              new BaiduMapPackage(getApplicationContext())
       );
     }
   };
