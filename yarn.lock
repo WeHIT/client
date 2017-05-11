@@ -2029,6 +2029,10 @@ image-size@^0.3.5:
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.3.5.tgz#83240eab2fb5b00b04aab8c74b0471e9cba7ad8c"
 
+immutable@^3.8.1:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
+
 immutable@~3.7.6:
   version "3.7.6"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.7.6.tgz#13b4d3cb12befa15482a26fe1b2ebae640071e4b"
@@ -3428,12 +3432,23 @@ react-deep-force-update@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.0.1.tgz#f911b5be1d2a6fe387507dd6e9a767aa2924b4c7"
 
+react-immutable-component@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/react-immutable-component/-/react-immutable-component-0.0.1.tgz#d39d994e3f3c896a4bf96395accaa63149d57505"
+
 react-native-app-intro@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/react-native-app-intro/-/react-native-app-intro-1.1.5.tgz#34a2d2265b2d654d31bae743c404856c37448692"
   dependencies:
     assign-deep "^0.4.5"
     react-native-swiper "git+https://github.com/FuYaoDe/react-native-swiper.git"
+
+react-native-autoheight-webview:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-autoheight-webview/-/react-native-autoheight-webview-0.2.2.tgz#8e5d5dd88a1783040cd995fe7aa848ae1f59a0d3"
+  dependencies:
+    immutable "^3.8.1"
+    react-immutable-component "0.0.1"
 
 react-native-baidu-map:
   version "0.6.0"

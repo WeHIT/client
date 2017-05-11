@@ -61,6 +61,7 @@ const WeFetch = (params, timeout = 2000, debug = false) => {
               desc: 'API 返回数据',
               url,
               res,
+              token: val
             })
           }
           return res.json();

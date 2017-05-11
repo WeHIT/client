@@ -14,8 +14,11 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  WebView,
 } from 'react-native';
+
+import AutoHeightWebView from 'react-native-autoheight-webview';
 
 import {
   getData
@@ -39,6 +42,33 @@ function renderNode(node, index) {
   }
 }
 
+const HTML = `
+<!DOCTYPE html>\n
+<html>
+  <head>
+    <title>HTML字符串</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=320, user-scalable=no">
+    <style type="text/css">
+      body {
+        margin: 0;
+        padding: 0;
+        font: 62.5% arial, sans-serif;
+        background: #ccc;
+      }
+      h1 {
+        padding: 45px;
+        margin: 0;
+        text-align: center;
+        color: #33f;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>加载静态的HTML文本信息</h1>
+  </body>
+</html>
+`;
 
 class Post extends Component {
 
@@ -86,12 +116,17 @@ class Post extends Component {
                     </View>
                   </View>
                 </View>
-                
+
                 <View style={styles.postContentContainer}>
-                  <HTMLView 
-                    value={post.data.comment[0].body}
-                    renderNode={renderNode}
+                  <AutoHeightWebView
+                    style={{width: Dimensions.get('window').width - 40}}
+                    source={{ html:post.data.comment[0].body }}
                   />
+
+                  {/*<HTMLView */}
+                    {/*value={post.data.comment[0].body}*/}
+                    {/*renderNode={renderNode}*/}
+                  {/*/>*/}
                   {
                     post.data.comment[0].fromPt === 'yes' ?
                     <View style={styles.postCopyRightContainer}>
@@ -113,7 +148,7 @@ class Post extends Component {
                         <Text style={styles.commentHeaderText}>评论</Text>
                       </View>
                     </View>
-                  ) : null   
+                  ) : null
               }
               {
                 post.data.comment.map((item, index) => {
@@ -266,7 +301,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   postContentHtml: {
-    
+
   },
   commentHeaderContainer: {
     marginTop: 20,

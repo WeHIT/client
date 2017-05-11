@@ -14,8 +14,11 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  WebView,
 } from 'react-native';
+
+import AutoHeightWebView from 'react-native-autoheight-webview';
 
 import {
   getData
@@ -86,12 +89,16 @@ class Post extends Component {
                     </View>
                   </View>
                 </View>
-                
+
                 <View style={styles.postContentContainer}>
-                  <HTMLView 
+                  <HTMLView
                     value={post.data.comment[0].body}
                     renderNode={renderNode}
                   />
+                  {/*<AutoHeightWebView*/}
+                    {/*style={{width: 200, height: 300}}*/}
+                    {/*source={{ html: post.data.comment[0].body }}*/}
+                  {/*/>*/}
                   {
                     post.data.comment[0].fromPt === 'yes' ?
                     <View style={styles.postCopyRightContainer}>
@@ -113,7 +120,7 @@ class Post extends Component {
                         <Text style={styles.commentHeaderText}>评论</Text>
                       </View>
                     </View>
-                  ) : null   
+                  ) : null
               }
               {
                 post.data.comment.map((item, index) => {
@@ -266,7 +273,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   postContentHtml: {
-    
+
   },
   commentHeaderContainer: {
     marginTop: 20,
