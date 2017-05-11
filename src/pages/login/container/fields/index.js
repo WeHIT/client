@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Storage } from '@base';
 import { connect } from "react-redux";
 import md5 from 'md5';
 import {
@@ -65,7 +66,7 @@ class Fields extends Component {
   };
 
   componentDidMount() {
-    this.keyboardShow = Keyboard.addListener('keyboardWillShow', 
+    this.keyboardShow = Keyboard.addListener('keyboardWillShow',
       this.updateKeyboardSpace.bind(this)
     );
     this.keyboardHide = Keyboard.addListener('keyboardWillHide',
@@ -81,15 +82,13 @@ class Fields extends Component {
 
     if(login.isFetching === false && this.props.login.isFetching === true) {
       this.refs.toast.show(login.data.text);
-      storage.save({
+
+      // 保存 Token
+      Storage.save({
         key: 'token',
-        rawData: login.data.token,
+        value: login.data.token
       });
-      storage.load({
-        key: 'token',
-      }).then(ret => {
-        console.log(ret)
-      });
+
     }
 
     if(reg.isFetching === false && this.props.reg.isFetching === true) {
@@ -187,7 +186,7 @@ class Fields extends Component {
 
     const isLoginStatus = isLogin ? isLogin.status : true;
 
-    return ( 
+    return (
       <View style={styles.container}>
         <View style={styles.containerBody}>
           <ScrollView

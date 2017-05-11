@@ -5,6 +5,8 @@ import { Navigator } from 'react-native';
 import routeMap from '@router';
 import storage from '@storage';
 
+import { Storage } from '@base';
+
 configureScene = (route) => {
   return Navigator.SceneConfigs.PushFromRight;
 };
@@ -21,22 +23,23 @@ renderScene = (route, navigator) => {
 class App extends Component{
 
   componentDidMount() {
-    // storage.save({
-    //   key: 'token',
-    //   rawData: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InNoYWJpIiwiaWF0IjoxNDkxODI1Njg5fQ.FD1_u1gGMUni2_eohxx6w_CgyV9vf0bbVSZkD4CjPqo'
-    // });
-    console.log('storage 初始化成功');
-    storage.load({
-      key: 'token',
-    }).then(ret => {
-      console.log(ret)
+
+    // 没有 Token 的情况下塞入一个默认 Token
+    Storage.load('token').then(val => {
+      if (!val) {
+        Storage.save({
+          key: 'token',
+          value: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InNoYWJpIiwiaWF0IjoxNDkxODI1Njg5fQ.FD1_u1gGMUni2_eohxx6w_CgyV9vf0bbVSZkD4CjPqo'
+        })
+      }
     });
+
   }
 
   render() {
     return (
       <Navigator
-        initialRoute={routeMap.intro}
+        initialRoute={routeMap.home}
         configureScene={configureScene}
         renderScene={renderScene} />
     )
