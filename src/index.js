@@ -26,12 +26,22 @@ class App extends Component{
 
     // 没有 Token 的情况下塞入一个默认 Token
     Storage.load('token').then(val => {
+      // 已经有 Token 的情况
       if (!val) {
         Storage.save({
           key: 'token',
           value: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InNoYWJpIiwiaWF0IjoxNDkxODI1Njg5fQ.FD1_u1gGMUni2_eohxx6w_CgyV9vf0bbVSZkD4CjPqo'
-        })
+        });
       }
+      // Token 过期等，抛出异常
+    }, err => {
+      Storage.save({
+        key: 'token',
+        value: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InNoYWJpIiwiaWF0IjoxNDkxODI1Njg5fQ.FD1_u1gGMUni2_eohxx6w_CgyV9vf0bbVSZkD4CjPqo'
+      });
+      console.log(err);
+    }).catch(e => {
+      console.log(e)
     });
 
   }

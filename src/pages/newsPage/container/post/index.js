@@ -73,7 +73,7 @@ const HTML = `
 class Post extends Component {
 
   componentDidMount() {
-    console.log('组件 props')
+    console.log('组件 props');
     console.log(this.props);
     const {
       id,

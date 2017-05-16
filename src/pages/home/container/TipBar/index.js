@@ -38,7 +38,7 @@ class TipBar extends Component {
     // 返回情况下不 push 消息
     if (data.actionText !== '返回') {
       this.props.getData({
-        command: "common",
+        command: this.props.nextCommand.data,
         options: {
           data: data.actionText,
           descText: data.descText,
@@ -58,7 +58,7 @@ class TipBar extends Component {
     } = this.props;
     return (
       <View style={styles.container}>
-        <ScrollView 
+        <ScrollView
           horizontal={true}>
           <Tip
             type='img'
@@ -90,8 +90,9 @@ const mapStateToProps = (state, ownProps) => {
   return {
     geo: state.geo,
     tipBar: state.tipBar,
+    nextCommand: state.nextCommand,
   };
-}
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {

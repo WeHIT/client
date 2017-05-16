@@ -44,7 +44,8 @@ const save = data => new Promise((resolve, reject) => {
 const load = key => new Promise((resolve, reject) => {
   storage.load({
     key,
-  }).then(val => resolve(val));
+  }).then(val => resolve(val))
+    .catch(e => reject(e));
 });
 
 export default {
