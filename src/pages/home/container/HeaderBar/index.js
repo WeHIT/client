@@ -14,7 +14,7 @@ export default class HeaderBar extends Component {
 
   touchMoreCb() {
     console.log(111)
-    this.props.navigator.push(routeMap.login);
+    this.props.navigator.push(routeMap.setting);
   }
   render() {
     return (

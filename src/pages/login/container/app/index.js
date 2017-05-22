@@ -29,8 +29,15 @@ class App extends Component {
     super(props);
   };
 
+  componentWillMount() {
+    // setting 传 flag 直接跳到注册界面
+    if (this.props.flag === 'reg') {
+      this.props.changeIsLogin(false);
+    }
+  }
+
   changeLoginOrRegStatus(e) {
-    this.props.changeIsLogin(!this.props.isLogin.status); 
+    this.props.changeIsLogin(!this.props.isLogin.status);
   }
 
   touchBack(e) {
@@ -42,7 +49,7 @@ class App extends Component {
       isLogin
     } = this.props;
 
-    return ( 
+    return (
       <View style={styles.container}>
         <Header
           leftText='返回'

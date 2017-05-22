@@ -22,7 +22,7 @@ const initState = {
     actionText: '查空教室',
     descText: '我要查空教室',
   }],
-}
+};
 
 const tipBarReducer = handleActions({
   [actions.fetchingDataSuccess]: (state, action) => {

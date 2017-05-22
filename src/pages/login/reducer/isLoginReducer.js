@@ -4,7 +4,7 @@ import * as actions from '../action';
 
 const initState = {
   status: true,
-}
+};
 
 const isLoginReducer = handleActions({
   [actions.changeIsLogin]: (state, action) => ({
