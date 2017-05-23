@@ -54,7 +54,7 @@ export default class Setting extends Component {
    * @desc 返回主页
    */
   backToHome() {
-    this.props.navigator.pop() && this.props.navigator.push(routeMap.home);
+    this.props.navigator.pop();
   }
 
   /**
@@ -145,6 +145,7 @@ export default class Setting extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   bottomBorder: {
     borderBottomWidth:.5,

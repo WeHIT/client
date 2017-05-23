@@ -50,7 +50,7 @@ export default class About extends Component {
    * @desc 返回主页
    */
   backToHome() {
-    this.props.navigator.pop() && this.props.navigator.push(routeMap.setting);
+    this.props.navigator.pop();
   }
 
   render() {
