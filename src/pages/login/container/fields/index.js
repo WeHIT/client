@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 
 import Toast, { DURATION } from 'react-native-easy-toast';
-import {Select, Option} from "react-native-chooser";
+import ModalPicker from 'react-native-modal-picker'
 
 import urlMap from '@url';
 import storage from '@storage';
@@ -33,18 +33,26 @@ import {
 } from '../../action';
 
 const collegeList = [{
-  key: 'cs',
-  value: '计算机学院'
-}, {
-  key: 'som',
-  value: '管理学院'
-}, {
-  key: 'sa',
-  value: '航天学院'
-}, {
-  key: 'fls',
-  value: '外国语学院'
-}];
+    key: '请选择学院',
+    section: true,
+    label: '请选择学院:',
+  },{
+    key: 'cs',
+    value: '计算机学院',
+    label: '计算机学院',
+  }, {
+    key: 'som',
+    value: '管理学院',
+    label: '管理学院',
+  }, {
+    key: 'sa',
+    value: '航天学院',
+    label: '航天学院',
+  }, {
+    key: 'fls',
+    value: '外国语学院',
+    label: '外国语学院',
+  }];
 
 class Fields extends Component {
 
@@ -59,6 +67,7 @@ class Fields extends Component {
       password: '',
       repassword: '',
       college: '',
+      collegeShow: '',
       idCard: '',
       // 标记学院是否进行了选择
       hasSelected: 0,
@@ -159,13 +168,15 @@ class Fields extends Component {
   };
 
 
-  onSelect(college) {
-    console.log(college);
+  onSelect(option) {
+    console.log(option);
     this.setState({
-      college,
+      college: option.key,
+      collegeShow: option.label,
       hasSelected: 1,
     })
   }
+
   render() {
     const {
       keyboardHeight,
@@ -174,6 +185,7 @@ class Fields extends Component {
       password,
       repassword,
       college,
+      collegeShow,
       idCard,
       hasSelected,
     } = this.state;
@@ -225,23 +237,19 @@ class Fields extends Component {
                     onChangeText={(value) => this.setState({repassword: value})} />
                 </View>
                 <View style={styles.loginInputContainer}>
-                  <Select
-                      onSelect = {this.onSelect.bind(this)}
-                      defaultText  = "请选择学院"
-                      style={[styles.textInput, {borderWidth: 0}]}
-                      textStyle = {{ fontSize: 18, color: hasSelected ? 'black' : '#c8c8ce'}}
-                      backdropStyle  = {{backgroundColor : "#d3d5d6"}}
-                      optionListStyle = {{backgroundColor : "#F5FCFF"}}
-                    >
-                    {
-                      collegeList.map((item, index) => {
-                        return(
-                          <Option key={index} value={item.key}>{item.value}</Option>
-                        )
-                      })
-                    }
-
-                  </Select>
+                  <ModalPicker
+                    data={collegeList}
+                    cancelText="取消"
+                    optionStyle={{height: 40, flex: 1, justifyContent: 'center'}}
+                    onChange={(option)=>{this.onSelect(option)}}
+                  >
+                    <TextInput
+                      style={styles.textInput}
+                      editable={false}
+                      placeholder={'请选择学院'}
+                      value={collegeShow}
+                    />
+                  </ModalPicker>
                 </View>
                 <View style={styles.loginInputContainer}>
                   <TextInput

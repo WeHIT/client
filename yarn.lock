@@ -3454,10 +3454,6 @@ react-native-baidu-map:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/react-native-baidu-map/-/react-native-baidu-map-0.6.0.tgz#cb4937181e8e0cd2125d347a5b87ca13971647dd"
 
-react-native-chooser:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-chooser/-/react-native-chooser-1.4.0.tgz#16a77c613fb54dd0f21f78a1b65acd73bc1effb5"
-
 react-native-code-push@1.17.4-beta:
   version "1.17.4-beta"
   resolved "https://registry.yarnpkg.com/react-native-code-push/-/react-native-code-push-1.17.4-beta.tgz#6badac8d69100252e42e051d6c9f9544e7eb8bc7"
@@ -3478,6 +3474,10 @@ react-native-htmlview:
   dependencies:
     entities "^1.1.1"
     htmlparser2-without-node-native "^3.9.0"
+
+react-native-modal-picker:
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/react-native-modal-picker/-/react-native-modal-picker-0.0.16.tgz#c9324d880a3bb8f36b772f378164977e2f431cbc"
 
 react-native-storage:
   version "0.1.5"

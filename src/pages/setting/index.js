@@ -26,28 +26,47 @@ export default class Setting extends Component {
      * @see https://segmentfault.com/q/1010000003807715
      * @desc rowHasChange 是 react组件纪录 state 是否更新的一个方法
      */
-    let ds = new ListView.DataSource({
+    this.ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
     this.state = {
-      dataSource: ds.cloneWithRows([{
-        icon: require('./login.png'),
-        text: '登录',
-      }, {
-        icon: require('./reg.png'),
-        text: '注册',
-      }, {
-        icon: require('./logout.png'),
-        text: '注销',
-      }, {
-        icon: require('./about.png'),
-        text: '关于'
-      }])
+      dataSource: [],
+
+      // nickname: 'rccoder',
+      // nickinfo: '1130310128 | 计算机科学与技术学院'
+      nickname: '未登录',
+      nickinfo: '点击进行登录'
+
     };
 
     this.backToHome = this.backToHome.bind(this);
     this.renderRow = this.renderRow.bind(this);
     this.pressRow = this.pressRow.bind(this);
+    this.pressUserInfo = this.pressUserInfo.bind(this);
+  }
+
+  componentDidMount() {
+    if(this.state.nickname === '未登录') {
+      this.setState({
+        dataSource: [{
+          icon: require('./reg.png'),
+          text: '注册',
+        }, {
+          icon: require('./about.png'),
+          text: '关于'
+        }]
+      })
+    } else {
+      this.setState({
+        dataSource: [{
+          icon: require('./logout.png'),
+          text: '注销',
+        }, {
+          icon: require('./about.png'),
+          text: '关于'
+        }]
+      })
+    }
   }
 
   /**
@@ -88,6 +107,14 @@ export default class Setting extends Component {
     }
   }
 
+  pressUserInfo(nickname) {
+    if(nickname === '未登录') {
+      this.props.navigator.push(routeMap.login);
+    } else {
+      this.props.navigator.push(routeMap.user);
+    }
+  }
+
   renderRow(rowData) {
     return(
       <TouchableOpacity
@@ -115,8 +142,13 @@ export default class Setting extends Component {
 
   render() {
     const {
-      ...othe
+      ...other,
     } = this.props;
+
+    const {
+      nickname,
+      nickinfo
+    } = this.state;
     return(
       <View style={styles.container}>
         <Header
@@ -124,8 +156,32 @@ export default class Setting extends Component {
           rightText=""
           leftCb={ this.backToHome }
         />
+        <TouchableOpacity
+          onPress={() => this.pressUserInfo(nickname)}
+          style={styles.userInfoViewWrap}>
+          <View style={styles.userAvatarViewWrap}>
+            <Image
+              source={require('@img/avatarDefault.png')}
+              style={{height: 100, width: 100, borderRadius: 50,}}
+            />
+          </View>
+          <View style={styles.userNicknameViewWrap}>
+            <Text style={styles.userNicknameTextWrap}>
+              {nickname}
+            </Text>
+            <Text style={styles.userNickInfoTextWrap}>
+              {nickinfo}
+            </Text>
+          </View>
+          <View style={[styles.rightPointWrap, {marginRight: 10}]}>
+            <Image
+              source={require('./next.png')}
+              style={{width: 16, height: 16}}
+            />
+          </View>
+        </TouchableOpacity>
         <ListView
-          dataSource={this.state.dataSource}
+          dataSource={this.ds.cloneWithRows(this.state.dataSource)}
           renderRow={(rowData) => this.renderRow(rowData)}
         />
         <Toast
@@ -149,13 +205,34 @@ const styles = StyleSheet.create({
   },
   bottomBorder: {
     borderBottomWidth:.5,
-    borderBottomColor:'#ccc'
+    borderBottomColor:'#ddd',
+  },
+  userInfoViewWrap: {
+    paddingTop: 4,
+    paddingBottom: 20,
+    backgroundColor: '#f8e71c',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  userAvatarViewWrap: {
+    marginLeft: 20,
+    marginRight: 20,
+  },
+  userNicknameViewWrap: {
+    flex: 1,
+  },
+  userNicknameTextWrap: {
+    fontSize: 28,
+    marginBottom: 16,
+  },
+  userNickInfoTextWrap: {
+    fontSize: 12,
   },
   rowViewWrap: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: 8,
-    paddingRight: 8,
+    marginLeft: 12,
+    marginRight: 12,
     height: 42,
   },
   iconViewWrap: {
@@ -167,6 +244,5 @@ const styles = StyleSheet.create({
   textContainer: {
   },
   rightPointWrap: {
-
   },
 });

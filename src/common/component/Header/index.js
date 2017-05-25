@@ -25,6 +25,7 @@ export default class Header extends Component {
     rightText: '注册',
     rightImg: {},
     rightCb: () => {},
+    rightColor: 'black',
     bgColor: '#f8e71c',
   };
 
@@ -47,6 +48,7 @@ export default class Header extends Component {
       PropTypes.number
     ]),
     rightCb: PropTypes.func,
+    rightColor: PropTypes.string,
   };
 
   constructor(props) {
@@ -64,6 +66,7 @@ export default class Header extends Component {
       rightText,
       rightImg,
       rightCb,
+      rightColor,
       bgColor
     } = this.props;
 
@@ -89,10 +92,10 @@ export default class Header extends Component {
               {middleText}
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity 
+          <TouchableOpacity
             style={styles.rightTitle}
             onPress={(e) => rightCb(e)}>
-            <Text>{rightText}</Text>
+            <Text style={{color: rightColor}}>{rightText}</Text>
           </TouchableOpacity>
         </View>
     );
