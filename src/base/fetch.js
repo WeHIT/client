@@ -36,7 +36,7 @@ const handleTimeOut = (fetchOkPromise, timeout) => {
  * @param {Number} timeout 超时时间
  * @param {bool} debug 是否打开 debug 模式
  */
-const WeFetch = (params, timeout = 2000, debug = false) => {
+const WeFetch = (params, timeout = 8000, debug = false) => {
 
   const {
     url,

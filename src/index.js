@@ -49,7 +49,7 @@ class App extends Component{
   render() {
     return (
       <Navigator
-        initialRoute={routeMap.setting}
+        initialRoute={routeMap.intro}
         configureScene={configureScene}
         renderScene={renderScene} />
     )
