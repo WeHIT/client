@@ -10,6 +10,8 @@ import {
 
 import routeMap from '@router';
 
+import { WeTouch } from '@base';
+
 export default class HeaderBar extends Component {
 
   touchMoreCb() {
@@ -20,11 +22,12 @@ export default class HeaderBar extends Component {
     return (
       <View style={styles.container}>
         <Image style={styles.imgIcon} source={require('./WeHITQ.png')} />
-        <TouchableOpacity
+        <WeTouch
+          spm={`wehit.home.header.more`}
           style={styles.moreContainer}
           onPress={e => this.touchMoreCb(e)}>
           <Image style={styles.more} source={require('./more.png')} />
-        </TouchableOpacity>
+        </WeTouch>
       </View>
     );
   }

@@ -10,6 +10,7 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import { WeTouch } from '@base';
 
 export default class Tip extends Component {
 
@@ -40,17 +41,18 @@ export default class Tip extends Component {
       img,
     } = this.props;
     return (
-      <TouchableOpacity
+      <WeTouch
         style={styles.container}
+        spm={`wehit.home.tipbar.${actionText}`}
         onPress={e => clickCb(e, {actionText, descText})}>
         {
-          type && type === 'img' ? 
+          type && type === 'img' ?
           <Image style={styles.imgContainer} source={img}/> :
           <Text style={styles.tipText}>
             {actionText}
           </Text>
         }
-      </TouchableOpacity>
+      </WeTouch>
     );
   }
 }

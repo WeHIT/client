@@ -9,14 +9,21 @@ import { Platform } from 'react-native';
 import { loggerMiddleware, fetchDataMiddleware } from '../middleware';
 //import logger from '../middleware/logger';
 
+import logger from 'redux-logger';
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+
+
 
 export default function configureStore(initialState, history) {
   const middleware = [
     thunkMiddleware,
     fetchDataMiddleware,
-    loggerMiddleware,
-    routerMiddleware(history)];
+    //loggerMiddleware,
+    routerMiddleware(history),
+    logger,
+    ];
 
   const store = createStore(
     rootReducer,

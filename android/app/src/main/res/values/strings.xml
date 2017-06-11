@@ -1,5 +1,6 @@
 <resources>
 
+
     <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">tLc3nnSVGufQE6xO8N9b9JbfGNxv4yiH2XBJX</string>
     <string name="app_name">WeHIT</string>
 </resources>

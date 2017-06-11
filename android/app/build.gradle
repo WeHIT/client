@@ -139,6 +139,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-device-info')
     compile project(':react-native-autoheight-webview')
     compile project(':react-native-code-push')
     compile fileTree(dir: "libs", include: ["*.jar"])

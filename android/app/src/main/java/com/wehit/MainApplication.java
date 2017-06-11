@@ -12,6 +12,7 @@ import com.facebook.soloader.SoLoader;
 import com.microsoft.codepush.react.CodePush;
 
 import org.lovebing.reactnative.baidumap.BaiduMapPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
+              new RNDeviceInfo(),
               new MainReactPackage(),
               new CodePush(getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
               new BaiduMapPackage(getApplicationContext())

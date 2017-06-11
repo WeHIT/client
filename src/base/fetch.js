@@ -28,7 +28,7 @@ const handleTimeOut = (fetchOkPromise, timeout) => {
     fetchOkPromise,
     fetchTimeOutPromise
   ]);
-}
+};
 
 /**
  * @desc 拥有超时处理的 fetch，返回 Promise
@@ -74,6 +74,6 @@ const WeFetch = (params, timeout = 8000, debug = false) => {
   });
 
   return handleTimeOut(fetchPromise, timeout);
-}
+};
 
 export default WeFetch;

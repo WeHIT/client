@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import { WeTouch } from '@base';
 
 export default class HeaderBar extends Component {
   static defaultProps = {
@@ -47,7 +48,8 @@ export default class HeaderBar extends Component {
       targetUrl,
     } = this.props;
     return (
-      <TouchableOpacity
+      <WeTouch
+        spm={`wehit.home.speakflow.${title}`}
         style={[styles.container,
           hasBottomBorder ? styles.hasBottomBorder : null,
           hasPaddingTop ? styles.hasPaddingTop : null]}
@@ -55,8 +57,8 @@ export default class HeaderBar extends Component {
         {
           pos === 'top' ?
           <View style={[styles.commonContainer, styles.topContainer]}>
-            <Image 
-            style={[styles.commonImgIcon, styles.topImgIcon]} 
+            <Image
+            style={[styles.commonImgIcon, styles.topImgIcon]}
             source={img ? {uri: img} : require('./demo.png')} />
             <View style={[styles.commonTitleView, styles.topTitleView]}>
               <Text style={[styles.commonTitle, styles.topTitle]}>{title}</Text>
@@ -66,12 +68,12 @@ export default class HeaderBar extends Component {
             <View style={[styles.commonTitleView, styles.bottomTitleView]}>
               <Text style={[styles.commonTitle, styles.bottomTitle]}>{title}</Text>
             </View>
-            <Image 
-              style={[styles.commonImgIcon, styles.bottomImgIcon]} 
+            <Image
+              style={[styles.commonImgIcon, styles.bottomImgIcon]}
               source={img ? {uri: img} : require('./demo.png')} />
           </View>
         }
-      </TouchableOpacity>
+      </WeTouch>
     );
   }
 }
@@ -84,7 +86,7 @@ const styles = StyleSheet.create({
     width: 300
   },
   topContainer: {
-    
+
   },
   bottomContainer: {
     paddingLeft: 10

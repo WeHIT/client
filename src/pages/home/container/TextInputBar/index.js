@@ -15,6 +15,8 @@ import {
 
 import { getData } from '../../action';
 
+import { WeTouch } from '@base';
+
 class TextInputBar extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +27,7 @@ class TextInputBar extends Component {
 
   /**
    * @desc textInput 的内容
-   * @param {sting} val 
+   * @param {sting} val
    */
   changeText(val) {
     this.setState({
@@ -60,11 +62,12 @@ class TextInputBar extends Component {
             onChangeText={(val) => this.changeText(val)}
             value={this.state.text} />
           </View>
-          <TouchableOpacity
+          <WeTouch
+            spm={`wehit.home.textinput.subBtn`}
             style={styles.buttonTextContainer}
             onPress={e => this.clickBtn(e)} >
             <Text style={styles.buttonText}>发送</Text>
-          </TouchableOpacity>
+          </WeTouch>
       </View>
     );
   }
