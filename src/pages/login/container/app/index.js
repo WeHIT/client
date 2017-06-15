@@ -46,7 +46,8 @@ class App extends Component {
 
   render() {
     const {
-      isLogin
+      isLogin,
+      ...other
     } = this.props;
 
     return (
@@ -58,7 +59,7 @@ class App extends Component {
           leftCb={e => this.touchBack(e)}
           rightCb={(e) => this.changeLoginOrRegStatus(e)}
          />
-         <Fields />
+         <Fields {...other}/>
       </View>
     );
   }

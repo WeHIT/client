@@ -14,7 +14,8 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  DeviceEventEmitter,
 } from 'react-native';
 
 import Toast, { DURATION } from 'react-native-easy-toast';
@@ -26,6 +27,8 @@ import storage from '@storage';
 import KeyboardSpacer from '@common/component/KeyboardSpacer';
 
 import Header from '../../component/Header';
+
+import routeMap from '@router';
 
 import {
   fetchLogin,
@@ -95,15 +98,32 @@ class Fields extends Component {
       // 保存 Token
       Storage.save({
         key: 'token',
-        value: login.data.token
+        value: login.data.token,
       });
 
+      // 保存基本信息
+      Storage.save({
+        key: 'info',
+        value: login.data.info,
+      });
+
+      Storage.save({
+        key: 'haslogin',
+        value: '1'
+      });
+
+      // 通知改变了登录信息
+      DeviceEventEmitter.emit('changeLoginInfo', {});
+
+
+      console.log(login.data);
     }
 
     if(reg.isFetching === false && this.props.reg.isFetching === true) {
       this.refs.toast.show(reg.data.text);
     }
   }
+
 
   updateKeyboardSpace(frames){
     if(!frames.endCoordinates){

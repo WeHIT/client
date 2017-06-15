@@ -32,12 +32,21 @@ class App extends Component{
           key: 'token',
           value: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InNoYWJpIiwiaWF0IjoxNDkxODI1Njg5fQ.FD1_u1gGMUni2_eohxx6w_CgyV9vf0bbVSZkD4CjPqo'
         });
+        // 0 表示没有登录
+        Storage.save({
+          key: 'haslogin',
+          value: '0',
+        })
       }
       // Token 过期等，抛出异常
     }, err => {
       Storage.save({
         key: 'token',
         value: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InNoYWJpIiwiaWF0IjoxNDkxODI1Njg5fQ.FD1_u1gGMUni2_eohxx6w_CgyV9vf0bbVSZkD4CjPqo'
+      });
+      Storage.save({
+        key: 'haslogin',
+        value: '0',
       });
       console.log(err);
     }).catch(e => {

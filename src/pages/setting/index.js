@@ -9,6 +9,7 @@ import {
   Image,
   ListView,
   TouchableOpacity,
+  DeviceEventEmitter,
 } from 'react-native';
 
 import { Storage } from '@base';
@@ -34,8 +35,8 @@ export default class Setting extends Component {
 
       // nickname: 'rccoder',
       // nickinfo: '1130310128 | 计算机科学与技术学院'
-      nickname: '未登录',
-      nickinfo: '点击进行登录'
+      nickname: '',
+      nickinfo: ''
 
     };
 
@@ -43,30 +44,134 @@ export default class Setting extends Component {
     this.renderRow = this.renderRow.bind(this);
     this.pressRow = this.pressRow.bind(this);
     this.pressUserInfo = this.pressUserInfo.bind(this);
+
+    this.refreshList = this.refreshList.bind(this);
   }
 
   componentDidMount() {
-    if(this.state.nickname === '未登录') {
-      this.setState({
-        dataSource: [{
-          icon: require('./reg.png'),
-          text: '注册',
-        }, {
-          icon: require('./about.png'),
-          text: '关于'
-        }]
+
+    this.subscription = DeviceEventEmitter.addListener('changeLoginInfo',this.refreshList);
+
+    Storage.load('haslogin').then(val => {
+      console.log(val);
+      // 0 表示没有登录
+      if(val === '0') {
+        this.setState({
+          nickname: '未登录',
+          nickinfo: '点击进行登录',
+          dataSource: [{
+            icon: require('./reg.png'),
+            text: '注册',
+          }, {
+            icon: require('./about.png'),
+            text: '关于'
+          }]
+        })
+      } else {
+
+        Storage.load('info').then(val => {
+          const nickname = JSON.parse(val).id;
+          const nickinfo = JSON.parse(val).college;
+
+          this.setState({
+            nickname: nickname,
+            nickinfo: nickinfo,
+            dataSource: [{
+              icon: require('./logout.png'),
+              text: '注销',
+            }, {
+              icon: require('./about.png'),
+              text: '关于'
+            }]
+          })
+        })
+      }
+    }, err => {
+      Storage.save({
+        key: 'haslogin',
+        value: '0'
+      });
+      Storage.save({
+        key: 'info',
+        value: '{}',
       })
-    } else {
-      this.setState({
-        dataSource: [{
-          icon: require('./logout.png'),
-          text: '注销',
-        }, {
-          icon: require('./about.png'),
-          text: '关于'
-        }]
+    });
+
+    // if(this.state.nickname === '未登录') {
+    //   this.setState({
+    //     dataSource: [{
+    //       icon: require('./reg.png'),
+    //       text: '注册',
+    //     }, {
+    //       icon: require('./about.png'),
+    //       text: '关于'
+    //     }]
+    //   })
+    // } else {
+    //   this.setState({
+    //     dataSource: [{
+    //       icon: require('./logout.png'),
+    //       text: '注销',
+    //     }, {
+    //       icon: require('./about.png'),
+    //       text: '关于'
+    //     }]
+    //   })
+    // }
+  }
+
+  componentWillUnmount() {
+    this.subscription.remove();
+  }
+
+  /**
+   * list 发生变化通知
+   */
+  refreshList() {
+    Storage.load('haslogin').then(val => {
+      console.log(val);
+      // 0 表示没有登录
+      if(val === '0') {
+        this.setState({
+          nickname: '未登录',
+          nickinfo: '点击进行登录',
+          dataSource: [{
+            icon: require('./reg.png'),
+            text: '注册',
+          }, {
+            icon: require('./about.png'),
+            text: '关于'
+          }]
+        })
+      } else {
+
+        Storage.load('info').then(val => {
+          const nickname = JSON.parse(val).id;
+          const nickinfo = JSON.parse(val).college;
+
+          this.setState({
+            nickname: nickname,
+            nickinfo: nickinfo,
+            dataSource: [{
+              icon: require('./logout.png'),
+              text: '注销',
+            }, {
+              icon: require('./about.png'),
+              text: '关于'
+            }]
+          })
+        })
+      }
+    }, err => {
+      Storage.save({
+        key: 'haslogin',
+        value: '0'
+      });
+      Storage.save({
+        key: 'info',
+        value: '{}',
       })
-    }
+    });
   }
 
   /**
@@ -97,7 +202,14 @@ export default class Setting extends Component {
           key: 'token',
           value: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InNoYWJpIiwiaWF0IjoxNDkxODI1Njg5fQ.FD1_u1gGMUni2_eohxx6w_CgyV9vf0bbVSZkD4CjPqo'
         });
+        Storage.save({
+          key: 'haslogin',
+          value: '0'
+        });
         this.refs.toast.show('注销成功');
+
+        DeviceEventEmitter.emit('changeLoginInfo', {});
+
         break;
       }
       case '关于': {
